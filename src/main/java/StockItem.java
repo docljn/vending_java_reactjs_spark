@@ -6,7 +6,7 @@ public enum StockItem {
     B (100, "B"),
     C (150, "C");
 
-    private final int price;   // in cents
+    private final Integer price;   // in cents
     private final String name;
 
 
@@ -14,9 +14,9 @@ public enum StockItem {
         this.price = price;
         this.name = name;
     }
-    private int price() { return price; }
+    private Integer price() { return price; }
 
-    public int getPrice() {
+    public Integer getPrice() {
         return price();
     }
 

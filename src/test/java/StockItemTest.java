@@ -8,7 +8,7 @@ public class StockItemTest {
 
     @Test
     public void testItemReturnsPrice() {
-        assertEquals(65, stockItem.A.getPrice());
+        assertEquals(Integer.valueOf(65), stockItem.A.getPrice());
     }
 
     @Test

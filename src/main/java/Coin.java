@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public enum Coin {
     NICKEL (5),
@@ -17,6 +18,9 @@ public enum Coin {
     public int getValue() {
         return value();
     }
+
+
+
 }
 
 // reference: https://docs.oracle.com/javase/tutorial/java/javaOO/enum.html
