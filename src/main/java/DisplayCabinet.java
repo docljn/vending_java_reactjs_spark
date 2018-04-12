@@ -12,13 +12,7 @@ public class DisplayCabinet {
 
 
 
-    public int getItemCount(StockItem stockItem) {
-        if (inStock(stockItem)) {
-            return this.items.get(stockItem);
-        } else {
-            return 0;
-        }
-    }
+
 
 
     public void add(StockItem stockItem) {
@@ -41,17 +35,34 @@ public class DisplayCabinet {
         return new ArrayList<>(this.items.keySet());
     }
 
-    public void restock(int stockLevel) {
+    public Integer getItemCount(StockItem stockItem) {
+        if (sells(stockItem)) {
+            return this.items.get(stockItem);
+        } else {
+            return 0;
+        }
+    }
+
+    public void restock(Integer stockLevel) {
 
         for (StockItem stockItem: getStockedItems()) {
             this.items.put(stockItem, stockLevel);
         }
     }
 
-    private boolean inStock(StockItem stockItem) {
-        return getStockedItems().contains(stockItem);
+
+    public void remove(StockItem selectedItem) {
+        if (sells(selectedItem) && inStock(selectedItem)) {
+            this.items.put(selectedItem, this.items.get(selectedItem) - 1);
+        }
     }
 
+    // PRIVATE METHODS
+    private boolean sells(StockItem stockItem) {
+       return getStockedItems().contains(stockItem);
+    }
 
-
+    private boolean inStock(StockItem stockItem) {
+        return getItemCount(stockItem) > 0;
+    }
 }

@@ -15,54 +15,65 @@ public class DisplayCabinetTest {
         displayCabinet = new DisplayCabinet();
 
         displayCabinetWithStock = new DisplayCabinet();
-        displayCabinetWithStock.add(StockItem.A, 1);
-        displayCabinetWithStock.add(StockItem.B, 1);
-        displayCabinetWithStock.add(StockItem.C, 1);
+        displayCabinetWithStock.add(StockItem.A);
+        displayCabinetWithStock.add(StockItem.B);
+        displayCabinetWithStock.add(StockItem.C);
     }
 
 
 
     @Test
     public void startsEmpty(){
-        assertEquals(0, displayCabinet.getItemCount(StockItem.A));
+        assertEquals(Integer.valueOf(0), displayCabinet.getItemCount(StockItem.A));
     }
 
     @Test
     public void canAcceptSingleStockItem(){
         displayCabinet.add(StockItem.A);
-        assertEquals(1, displayCabinet.getItemCount(StockItem.A));
+        assertEquals(Integer.valueOf(1), displayCabinet.getItemCount(StockItem.A));
     }
 
     @Test
     public void canAcceptMultipleStockItems(){
         displayCabinet.add(StockItem.A, 10);
-        assertEquals(10, displayCabinet.getItemCount(StockItem.A));
+        assertEquals(Integer.valueOf(10), displayCabinet.getItemCount(StockItem.A));
     }
 
     @Test
     public void canReturnItemsStocked(){
         ArrayList<StockItem> stockedItems = displayCabinetWithStock.getStockedItems();
-        assertEquals(StockItem.A, stockedItems.get(0));
         assertEquals(3, stockedItems.size());
     }
 
-    @Ignore
     @Test
     public void canBeRestocked(){
         displayCabinetWithStock.restock(10);
 
-        assertEquals(10, displayCabinetWithStock.getItemCount(StockItem.A));
-        assertEquals(10, displayCabinetWithStock.getItemCount(StockItem.B));
-        assertEquals(10, displayCabinetWithStock.getItemCount(StockItem.C));
+        assertEquals(Integer.valueOf(10), displayCabinetWithStock.getItemCount(StockItem.A));
+        assertEquals(Integer.valueOf(10), displayCabinetWithStock.getItemCount(StockItem.B));
+        assertEquals(Integer.valueOf(10), displayCabinetWithStock.getItemCount(StockItem.C));
 
     }
 
-    @Ignore
     @Test
-    public void canVendItem(){
-//        displayCabinet
+    public void canRemoveItem(){
+        displayCabinetWithStock.remove(StockItem.A);
+        assertEquals(Integer.valueOf(0), displayCabinetWithStock.getItemCount(StockItem.A));
+    }
+
+    @Test
+    public void cannotRemoveItemNotForSale(){
+        displayCabinet.remove(StockItem.A);
+        assertEquals(Integer.valueOf(0), displayCabinet.getItemCount(StockItem.A));
     }
 
 
-//        assertEquals(1, displayCabinet.getStockCount(StockItem.A));
+    @Test
+    public void cannotRemoveOutOfStockItem(){
+        displayCabinetWithStock.remove(StockItem.A);
+        displayCabinetWithStock.remove(StockItem.A);
+        assertEquals(Integer.valueOf(0), displayCabinetWithStock.getItemCount(StockItem.A));
+    }
+
+
 }
