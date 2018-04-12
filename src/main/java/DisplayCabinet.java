@@ -4,7 +4,7 @@ import java.util.HashMap;
 public class DisplayCabinet {
 
 
-    private HashMap<StockItem,Integer> items;
+    private HashMap<StockItem, Integer> items;
 
     public DisplayCabinet(){
         this.items = new HashMap<>();
@@ -41,9 +41,17 @@ public class DisplayCabinet {
         return new ArrayList<>(this.items.keySet());
     }
 
+    public void restock(int stockLevel) {
+
+        for (StockItem stockItem: getStockedItems()) {
+            this.items.put(stockItem, stockLevel);
+        }
+    }
+
     private boolean inStock(StockItem stockItem) {
         return getStockedItems().contains(stockItem);
     }
+
 
 
 }

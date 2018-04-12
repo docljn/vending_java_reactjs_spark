@@ -51,7 +51,10 @@ public class DisplayCabinetTest {
     public void canBeRestocked(){
         displayCabinetWithStock.restock(10);
 
-        assertEquals(10, displayCabinet.getItemCount(StockItem.A));
+        assertEquals(10, displayCabinetWithStock.getItemCount(StockItem.A));
+        assertEquals(10, displayCabinetWithStock.getItemCount(StockItem.B));
+        assertEquals(10, displayCabinetWithStock.getItemCount(StockItem.C));
+
     }
 
     @Ignore
