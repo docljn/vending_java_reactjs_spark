@@ -1,4 +1,3 @@
-import java.beans.PropertyEditor;
 
 public enum Coin {
     NICKEL (5),
@@ -19,3 +18,5 @@ public enum Coin {
         return value();
     }
 }
+
+// reference: https://docs.oracle.com/javase/tutorial/java/javaOO/enum.html

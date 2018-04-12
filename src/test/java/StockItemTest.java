@@ -10,4 +10,7 @@ public class StockItemTest {
     public void testItemReturnsPrice() {
         assertEquals(65, stockItem.A.getPrice());
     }
+
+    @Test
+    public void testItemReturnsName() { assertEquals("B", stockItem.B.getName()); }
 }
