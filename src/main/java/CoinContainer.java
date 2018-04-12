@@ -1,14 +1,13 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.stream.Stream;
 
-public class CoinHopper {
+public class CoinContainer {
 
 
     private HashMap<Coin, Integer> coins;
     private ArrayList<Coin> coinTypes;
 
-    public CoinHopper() {
+    public CoinContainer() {
 
 //            TODO: Consider how to include all types of accepted coins at the start?
         this.coins = new HashMap<>();
@@ -54,3 +53,7 @@ public class CoinHopper {
 
 
 }
+
+
+// For reference with BigDecimal
+// https://docs.oracle.com/javase/8/docs/api/java/math/BigDecimal.html#multiply-java.math.BigDecimal-

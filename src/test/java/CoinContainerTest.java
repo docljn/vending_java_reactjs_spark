@@ -3,15 +3,15 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class CoinHopperTest {
+public class CoinContainerTest {
 
-    CoinHopper hopper, hopperWithFloat;
+    CoinContainer hopper, hopperWithFloat;
 
     @Before
     public void before(){
-        hopper = new CoinHopper();
+        hopper = new CoinContainer();
 
-        hopperWithFloat = new CoinHopper();
+        hopperWithFloat = new CoinContainer();
         hopperWithFloat.addCoin(Coin.NICKEL);
         hopperWithFloat.addCoin(Coin.DIME);
         hopperWithFloat.addCoin(Coin.QUARTER);
