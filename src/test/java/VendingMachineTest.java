@@ -13,20 +13,6 @@ public class VendingMachineTest {
         machine = new VendingMachine();
     }
 
-    @Test
-    public void startsWithEmptyCoinSlot(){
-        assertEquals((Integer)0, machine.getAvailableCredit());
-    }
-
-    @Test
-    public void startsWithEmptyCoinHopper(){
-        assertEquals((Integer)0, machine.getCashCount());
-    }
-
-    @Test
-    public void startsWithEmptyChangeHopper(){
-        assertEquals((Integer)0, machine.getChangeCount());
-    }
 
     @Test
     public void setupFillsChangeHopper(){
@@ -34,18 +20,32 @@ public class VendingMachineTest {
         assertEquals((Integer)14000, machine.getChangeCount());
     }
 
-    @Test
-//    TODO: FAiling
-    public void startsWithEmptyDisplayCabinet(){
-        assertEquals(0, machine.availableItems().keySet());
-    }
 
-    @Ignore
     @Test
     public void setupFillsDisplayCabinet(){
         machine.setup();
-        assertEquals(true, true);
+        assertEquals(3, machine.availableItems().size());
+        assertEquals(10, machine.getStockLevel(StockItem.A));
+    }
 
+    @Test
+    public void setupReturnsCoinsForEmptyCoinSlot(){
+        machine.add(Coin.DIME);
+        machine.setup();
+        assertEquals((Integer)0, machine.getAvailableCredit());
+    }
+
+    @Test
+    public void addingCoinsFillsCoinSlot(){
+        machine.add(Coin.DOLLAR);
+        assertEquals((Integer)100, machine.getAvailableCredit());
+    }
+
+    @Test
+    public void coinReturnEmptiesCoinSlot(){
+        machine.add(Coin.DOLLAR);
+        machine.coinReturn();
+        assertEquals((Integer)0, machine.getAvailableCredit());
     }
 
 }

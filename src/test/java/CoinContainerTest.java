@@ -12,10 +12,10 @@ public class CoinContainerTest {
         hopper = new CoinContainer();
 
         hopperWithFloat = new CoinContainer();
-        hopperWithFloat.addCoin(Coin.NICKEL);
-        hopperWithFloat.addCoin(Coin.DIME);
-        hopperWithFloat.addCoin(Coin.QUARTER);
-        hopperWithFloat.addCoin(Coin.DOLLAR);
+        hopperWithFloat.add(Coin.NICKEL);
+        hopperWithFloat.add(Coin.DIME);
+        hopperWithFloat.add(Coin.QUARTER);
+        hopperWithFloat.add(Coin.DOLLAR);
     }
 
     @Test
@@ -25,13 +25,13 @@ public class CoinContainerTest {
 
     @Test
     public void canAddCoins(){
-        hopper.addCoin(Coin.DIME);
+        hopper.add(Coin.DIME);
         assertEquals((Integer)1, hopper.getCount(Coin.DIME));
     }
 
     @Test
     public void canAddMultipleCoins(){
-        hopper.addCoin(Coin.NICKEL, 10);
+        hopper.add(Coin.NICKEL, 10);
         assertEquals((Integer)10, hopper.getCount(Coin.NICKEL));
     }
 
@@ -41,9 +41,16 @@ public class CoinContainerTest {
     }
 
     @Test
-    public void canRemoveCoins(){
+    public void canRemoveCoin(){
         hopperWithFloat.remove(Coin.DOLLAR);
         assertEquals((Integer)40, hopperWithFloat.getCashCount());
+    }
+
+    @Test
+    public void canRemoveMultipleCoins(){
+        hopper.add(Coin.DOLLAR, 3);
+        hopper.remove(Coin.DOLLAR, 2);
+        assertEquals((Integer)100, hopper.getCashCount());
     }
 
     @Test
@@ -57,5 +64,17 @@ public class CoinContainerTest {
     public void resetFloatSetsFloatToSpecifiedLevels(){
         hopper.resetFloat(1);
         assertEquals((Integer)140, hopper.getCashCount());
+    }
+
+    @Test
+    public void transferAddsCoinsToAlternativeContainer(){
+        hopperWithFloat.transferCoins(hopper);
+        assertEquals((Integer)140, hopper.getCashCount());
+    }
+
+    @Test
+    public void transferRemovesCoinsFromContainer(){
+        hopperWithFloat.transferCoins(hopper);
+        assertEquals((Integer)0, hopperWithFloat.getCashCount());
     }
 }

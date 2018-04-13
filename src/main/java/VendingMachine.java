@@ -1,6 +1,4 @@
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 public class VendingMachine {
 
@@ -14,33 +12,46 @@ public class VendingMachine {
         this.displayCabinet = new DisplayCabinet();
     }
 
+    public void setup() {
+        this.changeHopper.resetFloat(100);
+        this.displayCabinet.restock(10);
+        coinReturn();
+    }
+
 
     public Integer getAvailableCredit() {
         return this.coinSlot.getCashCount();
     }
 
+    /*
+    TODO: Unclear as to whether this method is needed or not
     public Integer getCashCount() {
-        return this.coinHopper.getCashCount();
+    return this.coinHopper.getCashCount();
     }
+    */
 
-//    not sure if I need this, or just for testing purposes?
     public Integer getChangeCount() {
         return this.changeHopper.getCashCount();
     }
 
 
-    public ArrayList<StockItem> getStockedItems() {
-        return this.displayCabinet.getStockItemTypes();
-    }
-
-    public void setup() {
-        this.changeHopper.resetFloat(100);
-    }
 
 
-//    TODO:
+
     public HashMap<StockItem,Integer> availableItems() {
+        return this.displayCabinet.getAvailableItems();
+    }
 
-        return null;
+    public int getStockLevel(StockItem stockItem) {
+        return this.displayCabinet.getItemCount(stockItem);
+    }
+
+    public void add(Coin coin) {
+        this.coinSlot.add(coin);
+    }
+
+    public void coinReturn() {
+//        I'm not modelling the purchaser, so the coins effectively vanish here
+        this.coinSlot.transferCoins(new CoinContainer());
     }
 }

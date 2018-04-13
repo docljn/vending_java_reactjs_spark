@@ -2,6 +2,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
 
@@ -79,6 +80,14 @@ public class DisplayCabinetTest {
     @Test
     public void canSelectItemBySelector(){
         assertEquals(StockItem.B, displayCabinetWithStock.select("B"));
+    }
+
+    @Test
+    public void canReturnContents(){
+        HashMap<StockItem, Integer> expected = new HashMap<>();
+        expected.put(StockItem.A, 1);
+        displayCabinet.add(StockItem.A);
+        assertEquals(expected, displayCabinet.getAvailableItems());
     }
 
 

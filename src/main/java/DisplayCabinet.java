@@ -13,7 +13,6 @@ public class DisplayCabinet {
 
         this.stockItemTypes = StockItem.class.getEnumConstants();
         this.availableItems = new HashMap<>();
-//        TODO: Should the availableItems be filled with value = 0 for all possible keys at this stage?
     }
 
 
@@ -77,7 +76,6 @@ public class DisplayCabinet {
         }
     }
 
-//TODO:
     public StockItem select(String itemSelector) {
         for (StockItem item: getStockItemTypes()) {
             if (item.getSelector() == itemSelector){
@@ -86,5 +84,10 @@ public class DisplayCabinet {
         }
         return null;
 //        may need to rethink this, or guard against null pointer exceptions
+    }
+
+    public HashMap<StockItem,Integer> getAvailableItems() {
+
+        return this.availableItems;
     }
 }

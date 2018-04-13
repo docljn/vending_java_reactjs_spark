@@ -24,7 +24,7 @@ public class CoinContainer {
         return value;
     }
 
-    public void addCoin(Coin coin) {
+    public void add(Coin coin) {
         if (this.coins.containsKey(coin)) {
             this.coins.put(coin, coins.get(coin) + 1);
         } else {
@@ -32,9 +32,9 @@ public class CoinContainer {
         }
     }
 
-    public void addCoin(Coin coin, int numberToAdd) {
+    public void add(Coin coin, int numberToAdd) {
         for (int i = 0; i < numberToAdd; i++){
-            addCoin(coin);
+            add(coin);
         }
     }
 
@@ -52,12 +52,30 @@ public class CoinContainer {
         }
     }
 
+    public void remove(Coin coin, int numberToRemove) {
+        for (int i = 0; i < numberToRemove; i++){
+            remove(coin);
+        }
+    }
+
 
     public void resetFloat(int numberOfCoins) {
         for (Coin coin : acceptedCoinTypes) {
             this.coins.put(coin, numberOfCoins);
         }
     }
+
+
+    public void transferCoins(CoinContainer alternateCoinContainer) {
+
+        for (Coin coin: this.coins.keySet()) {
+            alternateCoinContainer.add(coin, this.coins.get(coin));
+        }
+
+        this.coins = new HashMap<>();
+    }
+
+
 }
 
 
