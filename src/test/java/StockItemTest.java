@@ -12,5 +12,6 @@ public class StockItemTest {
     }
 
     @Test
-    public void testItemReturnsName() { assertEquals("B", stockItem.B.getName()); }
+    public void testItemReturnsSelector() { assertEquals("B", stockItem.B.getSelector()); }
+
 }

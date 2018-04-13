@@ -52,4 +52,10 @@ public class CoinContainerTest {
         hopperWithFloat.remove(Coin.DOLLAR);
         assertEquals((Integer)40, hopperWithFloat.getCashCount());
     }
+
+    @Test
+    public void resetFloatSetsFloatToSpecifiedLevels(){
+        hopper.resetFloat(1);
+        assertEquals((Integer)140, hopper.getCashCount());
+    }
 }

@@ -7,21 +7,20 @@ public enum StockItem {
     C (150, "C");
 
     private final Integer price;   // in cents
-    private final String name;
+    private final String selector;
 
 
-    StockItem(int price, String name) {
+    StockItem(int price, String selector) {
         this.price = price;
-        this.name = name;
+        this.selector = selector;
     }
-    private Integer price() { return price; }
 
     public Integer getPrice() {
-        return price();
+        return this.price;
     }
 
-    public String getName() {
-        return name;
+    public String getSelector() {
+        return this.selector;
     }
 }
 

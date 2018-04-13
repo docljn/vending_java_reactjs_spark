@@ -1,26 +1,23 @@
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CoinContainer {
 
 
     private HashMap<Coin, Integer> coins;
-    private ArrayList<Coin> coinTypes;
+    private Coin[] acceptedCoinTypes;
 
     public CoinContainer() {
 
-//            TODO: Consider how to include all types of accepted coins at the start?
+        this.acceptedCoinTypes = Coin.class.getEnumConstants();
         this.coins = new HashMap<>();
+        //        TODO: Should the coins be filled with value = 0 for all possible keys at this stage?
+
 
     }
 
     public Integer getCashCount() {
-
         Integer value = 0;
-//        can't do this in the constructor as it wouldn't update
-        coinTypes = new ArrayList<>(this.coins.keySet());
-
-        for (Coin coin : coinTypes
+        for (Coin coin : acceptedCoinTypes
              ) {
             value += getCount(coin) * coin.getValue();
         }
@@ -42,7 +39,11 @@ public class CoinContainer {
     }
 
     public Integer getCount(Coin coin) {
-        return this.coins.get(coin);
+        Integer count = 0;
+        if (this.coins.containsKey(coin)) {
+            count =  this.coins.get(coin);
+        }
+        return count;
     }
 
     public void remove(Coin coin) {
@@ -52,6 +53,11 @@ public class CoinContainer {
     }
 
 
+    public void resetFloat(int numberOfCoins) {
+        for (Coin coin : acceptedCoinTypes) {
+            this.coins.put(coin, numberOfCoins);
+        }
+    }
 }
 
 

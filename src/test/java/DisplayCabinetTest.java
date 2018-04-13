@@ -1,5 +1,4 @@
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ public class DisplayCabinetTest {
 
     @Test
     public void startsEmpty(){
-        assertEquals(Integer.valueOf(0), displayCabinet.getItemCount(StockItem.A));
+        assertEquals(Integer.valueOf(0), displayCabinet.getItemCount());
     }
 
     @Test
@@ -39,9 +38,10 @@ public class DisplayCabinetTest {
         assertEquals(Integer.valueOf(10), displayCabinet.getItemCount(StockItem.A));
     }
 
+//    TODO: Check if this method is needed for fuctionality
     @Test
     public void canReturnItemsStocked(){
-        ArrayList<StockItem> stockedItems = displayCabinetWithStock.getStockedItems();
+        ArrayList<StockItem> stockedItems = displayCabinet.getStockItemTypes();
         assertEquals(3, stockedItems.size());
     }
 
@@ -73,6 +73,12 @@ public class DisplayCabinetTest {
         displayCabinetWithStock.remove(StockItem.A);
         displayCabinetWithStock.remove(StockItem.A);
         assertEquals(Integer.valueOf(0), displayCabinetWithStock.getItemCount(StockItem.A));
+    }
+
+
+    @Test
+    public void canSelectItemBySelector(){
+        assertEquals(StockItem.B, displayCabinetWithStock.select("B"));
     }
 
 
