@@ -13,6 +13,8 @@ public class VendingMachine {
         this.changeHopper = new CoinContainer();
         this.displayCabinet = new DisplayCabinet();
         this.selectedItem = null;
+        //        TODO: may need to rethink this, or guard against null pointer exceptions
+
     }
 
     public void service() {

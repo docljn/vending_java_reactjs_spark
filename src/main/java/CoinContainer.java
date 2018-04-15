@@ -10,8 +10,6 @@ public class CoinContainer {
 
         this.acceptedCoinTypes = Coin.class.getEnumConstants();
         this.coins = new HashMap<>();
-        //        TODO: Should the coins be filled with value = 0 for all possible keys at this stage?
-
 
     }
 
@@ -93,6 +91,7 @@ public class CoinContainer {
 
 
     public HashMap<Coin, Integer> coinEquivalent(Integer amount) {
+
         Integer runningTotal = amount;
 
         // set up the empty coin list
@@ -103,17 +102,19 @@ public class CoinContainer {
 
         // find largest available coin in available coins & loop...
 
+        if (getCashCount() >= amount) {
 
-        for (int index = getAcceptedCoins().length-1; index >=0; index--) {
-            Coin currentLargestCoin = getAcceptedCoins()[index];
+            for (int index = getAcceptedCoins().length - 1; index >= 0; index--) {
+                Coin currentLargestCoin = getAcceptedCoins()[index];
 
-            while (runningTotal >= currentLargestCoin.getValue() && getCount(currentLargestCoin) > coinsRequired.get(currentLargestCoin)) {
-                runningTotal -= currentLargestCoin.getValue();
-                coinsRequired.put(currentLargestCoin, coinsRequired.get(currentLargestCoin) + 1);
+                while (runningTotal >= currentLargestCoin.getValue() && getCount(currentLargestCoin) > coinsRequired.get(currentLargestCoin)) {
+                    runningTotal -= currentLargestCoin.getValue();
+                    coinsRequired.put(currentLargestCoin, coinsRequired.get(currentLargestCoin) + 1);
+                }
             }
-        }
-        if (runningTotal != 0){
-            //something to say insufficient change available...;
+            if (runningTotal != 0) {
+                //something to say insufficient change available...;
+            }
         }
         return coinsRequired;
     }

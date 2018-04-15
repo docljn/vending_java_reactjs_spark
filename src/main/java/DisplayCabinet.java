@@ -83,7 +83,7 @@ public class DisplayCabinet {
             }
         }
         return null;
-//        may need to rethink this, or guard against null pointer exceptions
+//        TODO: may need to rethink this, or guard against null pointer exceptions
     }
 
     public HashMap<StockItem,Integer> getAvailableItems() {
