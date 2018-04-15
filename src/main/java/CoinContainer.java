@@ -15,13 +15,24 @@ public class CoinContainer {
 
     }
 
+
+
+    public Coin[] getAcceptedCoins() {
+        return this.acceptedCoinTypes;
+    }
+
     public Integer getCashCount() {
         Integer value = 0;
         for (Coin coin : acceptedCoinTypes
-             ) {
+                ) {
             value += getCount(coin) * coin.getValue();
         }
         return value;
+    }
+
+
+    public HashMap<Coin,Integer> getCoinContents() {
+        return this.coins;
     }
 
     public void add(Coin coin) {
@@ -46,16 +57,20 @@ public class CoinContainer {
         return count;
     }
 
-    public void remove(Coin coin) {
+    public boolean remove(Coin coin) {
         if (this.coins.containsKey(coin) && getCount(coin) > 0) {
             this.coins.put(coin, coins.get(coin) - 1);
+            return true;
         }
+        return false;
     }
 
-    public void remove(Coin coin, int numberToRemove) {
+    public boolean remove(Coin coin, int numberToRemove) {
+        boolean success = false;
         for (int i = 0; i < numberToRemove; i++){
-            remove(coin);
+            success = remove(coin);
         }
+        return success;
     }
 
 
@@ -66,7 +81,7 @@ public class CoinContainer {
     }
 
 
-    public void transferCoins(CoinContainer alternateCoinContainer) {
+    public void transferAllCoins(CoinContainer alternateCoinContainer) {
 
         for (Coin coin: this.coins.keySet()) {
             alternateCoinContainer.add(coin, this.coins.get(coin));
@@ -76,6 +91,32 @@ public class CoinContainer {
     }
 
 
+
+    public HashMap<Coin, Integer> coinEquivalent(Integer amount) {
+        Integer runningTotal = amount;
+
+        // set up the empty coin list
+        HashMap<Coin, Integer> coinsRequired = new HashMap<>();
+        for (int i = 0; i < getAcceptedCoins().length; i++) {
+            coinsRequired.put(getAcceptedCoins()[i], 0);
+        }
+
+        // find largest available coin in available coins & loop...
+
+
+        for (int index = getAcceptedCoins().length-1; index >=0; index--) {
+            Coin currentLargestCoin = getAcceptedCoins()[index];
+
+            while (runningTotal >= currentLargestCoin.getValue() && getCount(currentLargestCoin) > coinsRequired.get(currentLargestCoin)) {
+                runningTotal -= currentLargestCoin.getValue();
+                coinsRequired.put(currentLargestCoin, coinsRequired.get(currentLargestCoin) + 1);
+            }
+        }
+        if (runningTotal != 0){
+            //something to say insufficient change available...;
+        }
+        return coinsRequired;
+    }
 }
 
 

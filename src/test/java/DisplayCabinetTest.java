@@ -77,6 +77,7 @@ public class DisplayCabinetTest {
     }
 
 
+//    TODO: may not need this method?
     @Test
     public void canSelectItemBySelector(){
         assertEquals(StockItem.B, displayCabinetWithStock.select("B"));

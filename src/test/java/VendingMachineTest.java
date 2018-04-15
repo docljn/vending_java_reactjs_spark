@@ -1,6 +1,7 @@
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
+
+import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
 
@@ -15,23 +16,23 @@ public class VendingMachineTest {
 
 
     @Test
-    public void setupFillsChangeHopper(){
-        machine.setup();
+    public void serviceFillsChangeHopper(){
+        machine.service();
         assertEquals((Integer)14000, machine.getChangeCount());
     }
 
 
     @Test
-    public void setupFillsDisplayCabinet(){
-        machine.setup();
+    public void serviceFillsDisplayCabinet(){
+        machine.service();
         assertEquals(3, machine.availableItems().size());
         assertEquals(10, machine.getStockLevel(StockItem.A));
     }
 
     @Test
-    public void setupReturnsCoinsForEmptyCoinSlot(){
+    public void serviceReturnsCoinsForEmptyCoinSlot(){
         machine.add(Coin.DIME);
-        machine.setup();
+        machine.service();
         assertEquals((Integer)0, machine.getAvailableCredit());
     }
 
@@ -47,5 +48,32 @@ public class VendingMachineTest {
         machine.coinReturn();
         assertEquals((Integer)0, machine.getAvailableCredit());
     }
+
+    @Test
+    public void selectSetsStockItemToSelected(){
+        machine.service();
+        machine.select(StockItem.A);
+        assertEquals(StockItem.A, machine.getSelectedItem());
+    }
+
+    @Test
+    public void selectSetsSelectedToNullIfNotInStock(){
+        machine.select(StockItem.A);
+        assertEquals(null, machine.getSelectedItem());
+    }
+
+
+    @Test
+    public void selectReturnsChangeWarningIfInsufficientChange(){
+
+    }
+
+
+    @Test
+    public void selectReturnsItemPriceAndInsertCoinsRequestIfInsufficientFunds(){
+
+    }
+
+
 
 }

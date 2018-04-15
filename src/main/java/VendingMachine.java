@@ -1,18 +1,21 @@
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 public class VendingMachine {
 
     private CoinContainer coinSlot, coinHopper, changeHopper;
     private DisplayCabinet displayCabinet;
+    private StockItem selectedItem;
 
     public VendingMachine() {
         this.coinSlot = new CoinContainer();
         this.coinHopper = new CoinContainer();
         this.changeHopper = new CoinContainer();
         this.displayCabinet = new DisplayCabinet();
+        this.selectedItem = null;
     }
 
-    public void setup() {
+    public void service() {
         this.changeHopper.resetFloat(100);
         this.displayCabinet.restock(10);
         coinReturn();
@@ -36,8 +39,6 @@ public class VendingMachine {
 
 
 
-
-
     public HashMap<StockItem,Integer> availableItems() {
         return this.displayCabinet.getAvailableItems();
     }
@@ -52,6 +53,40 @@ public class VendingMachine {
 
     public void coinReturn() {
 //        I'm not modelling the purchaser, so the coins effectively vanish here
-        this.coinSlot.transferCoins(new CoinContainer());
+        this.coinSlot.transferAllCoins(new CoinContainer());
     }
+
+
+    public void select(StockItem selectedItem) {
+        this.selectedItem = null;
+        if (this.displayCabinet.inStock(selectedItem)) {
+            this.selectedItem = selectedItem;
+        }
+    }
+
+    public StockItem getSelectedItem() {
+        return this.selectedItem;
+    }
+
+    public Integer changeDueAmount() {
+        return getAvailableCredit() - selectedItem.getPrice();
+    }
+
+
+//    public StockItem vend() {
+//        StockItem toVend = getSelectedItem();
+//        if (getAvailableCredit() >= toVend.getPrice()) {
+//            this.selectedItem = null;
+//            change = calculateChangeDueInCoins();
+//            this.coinSlot.transferAllCoins(this.coinHopper);
+//            this.changeHopper.remove(
+//            return toVend;
+//
+//        }
+////        TODO: this is going to cause problems!
+//        else {
+//
+//        }
+//        return toVend;
+//    }
 }
