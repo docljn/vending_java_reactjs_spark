@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 
@@ -6,6 +7,7 @@ public class VendingMachine {
     private CoinContainer coinSlot, coinHopper, changeHopper;
     private DisplayCabinet displayCabinet;
     private StockItem selectedItem;
+    private String message;
 
     public VendingMachine() {
         this.coinSlot = new CoinContainer();
@@ -13,6 +15,7 @@ public class VendingMachine {
         this.changeHopper = new CoinContainer();
         this.displayCabinet = new DisplayCabinet();
         this.selectedItem = null;
+        this.message = "";
         //        TODO: may need to rethink this, or guard against null pointer exceptions
 
     }
@@ -23,17 +26,20 @@ public class VendingMachine {
         coinReturn();
     }
 
+    public void testService() {
+        this.changeHopper.resetFloat(1);
+        this.displayCabinet.restock(1);
+        coinReturn();
+    }
+
 
     public Integer getAvailableCredit() {
         return this.coinSlot.getCashCount();
     }
 
-    /*
-    TODO: Unclear as to whether this method is needed or not
     public Integer getCashCount() {
     return this.coinHopper.getCashCount();
     }
-    */
 
     public Integer getChangeCount() {
         return this.changeHopper.getCashCount();
@@ -56,39 +62,54 @@ public class VendingMachine {
     public void coinReturn() {
 //        I'm not modelling the purchaser, so the coins effectively vanish here
         this.coinSlot.transferAllCoins(new CoinContainer());
+        this.selectedItem = null;
     }
 
 
-    public void select(StockItem selectedItem) {
+    public Integer select(StockItem selectedItem) {
+//        TODO: Consider how to handle out of stock situation: currently returning zero price
         this.selectedItem = null;
+        Integer price = 0;
         if (this.displayCabinet.inStock(selectedItem)) {
             this.selectedItem = selectedItem;
+            price = this.selectedItem.getPrice();
+            this.message = (BigDecimal.valueOf(price)).divide(BigDecimal.valueOf(100)).toString();
+        } else {
+            this.message = "Out of Stock";
         }
+        return price;
     }
 
     public StockItem getSelectedItem() {
         return this.selectedItem;
     }
 
-    public Integer changeDueAmount() {
-        return getAvailableCredit() - selectedItem.getPrice();
+
+    public void vend() {
+        StockItem itemToVend = getSelectedItem();
+        if (itemToVend != null) {
+            Integer changeDueAmount = getAvailableCredit() - itemToVend.getPrice();
+            if (changeDueAmount >= 0) {
+                HashMap<Coin, Integer> coinChange = this.changeHopper.coinEquivalent(changeDueAmount);
+
+                this.coinSlot.transferAllCoins(coinHopper);
+                this.displayCabinet.remove(itemToVend);  // you can't select something that isn't in stock
+                this.selectedItem = null;
+                this.changeHopper.remove(coinChange); // returns false if insufficient change
+            } else {
+                this.message = "Please insert coins";
+            }
+        } else {
+            coinReturn();
+        }
+
+    }
+
+    public String getMessage() {
+
+        return this.message;
     }
 
 
-//    public StockItem vend() {
-//        StockItem toVend = getSelectedItem();
-//        if (getAvailableCredit() >= toVend.getPrice()) {
-//            this.selectedItem = null;
-//            change = calculateChangeDueInCoins();
-//            this.coinSlot.transferAllCoins(this.coinHopper);
-//            this.changeHopper.remove(
-//            return toVend;
-//
-//        }
-////        TODO: this is going to cause problems!
-//        else {
-//
-//        }
-//        return toVend;
-//    }
+
 }

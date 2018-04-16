@@ -4,7 +4,9 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class DisplayCabinetTest {
 
@@ -89,6 +91,13 @@ public class DisplayCabinetTest {
         expected.put(StockItem.A, 1);
         displayCabinet.add(StockItem.A);
         assertEquals(expected, displayCabinet.getAvailableItems());
+    }
+
+    @Test
+    public void canDetermineIfItemInStock() {
+        displayCabinet.add(StockItem.A);
+        assertTrue(displayCabinet.inStock(StockItem.A));
+        assertFalse(displayCabinet.inStock(StockItem.C));
     }
 
 

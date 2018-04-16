@@ -75,6 +75,23 @@ public class CoinContainerTest {
     }
 
     @Test
+    public void canRemoveHashMapOfCoins(){
+
+        HashMap<Coin, Integer> toRemove = new HashMap<>();
+        toRemove.put(Coin.NICKEL, 1);
+        toRemove.put(Coin.DIME, 1);
+        toRemove.put(Coin.QUARTER, 1);
+
+        HashMap<Coin, Integer> expected = new HashMap<>();
+        expected.put(Coin.DOLLAR, 1);
+
+        hopperWithFloat.remove(toRemove);
+        assertEquals(expected, hopperWithFloat.getCoinContents());
+
+
+    }
+
+    @Test
     public void cannotRemoveCoinNotPresent(){
         hopperWithFloat.remove(Coin.DOLLAR);
         hopperWithFloat.remove(Coin.DOLLAR);
@@ -146,7 +163,7 @@ public class CoinContainerTest {
     }
 
     @Test
-    public void canReturnCoinListEquivalentIfRunOutOfCoins(){
+    public void canReturnCoinListEquivalentIfRunOutOfSomeCoins(){
         hopperWithFloat.add(Coin.DIME);
 
         HashMap<Coin, Integer> expected = new HashMap<>();
@@ -158,4 +175,6 @@ public class CoinContainerTest {
         assertEquals(expected, hopperWithFloat.coinEquivalent(150));
 
     }
+
+
 }

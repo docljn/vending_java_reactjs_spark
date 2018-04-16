@@ -1,30 +1,33 @@
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class VendingMachineTest {
 
-    VendingMachine machine;
+    VendingMachine machine, machineWithoutStock;
 
     @Before
     public void before(){
         machine = new VendingMachine();
+        machine.service();
+
+        machineWithoutStock = new VendingMachine();
     }
 
 
     @Test
     public void serviceFillsChangeHopper(){
-        machine.service();
         assertEquals((Integer)14000, machine.getChangeCount());
     }
 
 
     @Test
     public void serviceFillsDisplayCabinet(){
-        machine.service();
         assertEquals(3, machine.availableItems().size());
         assertEquals(10, machine.getStockLevel(StockItem.A));
     }
@@ -42,6 +45,7 @@ public class VendingMachineTest {
         assertEquals((Integer)100, machine.getAvailableCredit());
     }
 
+
     @Test
     public void coinReturnEmptiesCoinSlot(){
         machine.add(Coin.DOLLAR);
@@ -49,31 +53,151 @@ public class VendingMachineTest {
         assertEquals((Integer)0, machine.getAvailableCredit());
     }
 
+
+
     @Test
     public void selectSetsStockItemToSelected(){
-        machine.service();
         machine.select(StockItem.A);
         assertEquals(StockItem.A, machine.getSelectedItem());
     }
 
     @Test
     public void selectSetsSelectedToNullIfNotInStock(){
+        machineWithoutStock.select(StockItem.A);
+        assertEquals(null, machine.getSelectedItem());
+    }
+
+    @Test
+    public void selectReturnsItemPrice(){
+        assertEquals((Integer)65, machine.select(StockItem.A));
+    }
+
+    @Test
+    public void selectReturnsZeroIfItemNotInStock(){
+        assertEquals((Integer)0, machineWithoutStock.select(StockItem.A));
+    }
+
+    @Test
+    public void selectDisplaysOutOfStockMessage(){
+        machineWithoutStock.select(StockItem.B);
+        assertEquals("Out of Stock", machineWithoutStock.getMessage());
+    }
+
+    @Test
+    public void selectDisplaysPriceIfInStock(){
         machine.select(StockItem.A);
+        assertEquals("0.65", machine.getMessage());
+    }
+
+    @Test
+    public void coinReturnResetsSelectedToNull(){
+        machine.add(Coin.DOLLAR);
+        machine.select(StockItem.A);
+        machine.coinReturn();
         assertEquals(null, machine.getSelectedItem());
     }
 
 
     @Test
-    public void selectReturnsChangeWarningIfInsufficientChange(){
+    public void vendTransfersCoinsFromSlotToHopper(){
+        machine.add(Coin.DOLLAR);
+        machine.select(StockItem.B);
+        machine.vend();
+        assertEquals((Integer)100, machine.getCashCount());
+    }
 
+
+
+    @Test
+    public void vendDecreasesSelectedItemCount(){
+        machine.add(Coin.DOLLAR);
+        machine.select(StockItem.B);
+        machine.vend();
+        assertEquals(9, machine.getStockLevel(StockItem.B));
+    }
+
+    @Test
+    public void vendResetsSelectedItemToNull(){
+        machine.add(Coin.DOLLAR);
+        machine.select(StockItem.B);
+        machine.vend();
+        assertNull(machine.getSelectedItem());
     }
 
 
     @Test
-    public void selectReturnsItemPriceAndInsertCoinsRequestIfInsufficientFunds(){
+    public void vendDispensesCorrectChangeIfAvailable(){
+        machineWithoutStock.testService();
+        machineWithoutStock.add(Coin.DOLLAR);
+        machineWithoutStock.add(Coin.DOLLAR);
 
+        machineWithoutStock.select(StockItem.B);
+        machineWithoutStock.vend();
+        assertEquals((Integer)40, machineWithoutStock.getChangeCount());
     }
 
 
+    @Test
+    public void vendDispensesAvailableChangeOnlyIfInsufficientChange(){
+        machineWithoutStock.testService();
+        machineWithoutStock.add(Coin.DOLLAR);
+        machineWithoutStock.add(Coin.NICKEL);
+        machineWithoutStock.add(Coin.NICKEL);
+        machineWithoutStock.add(Coin.DIME);
+        machineWithoutStock.select(StockItem.B);
+        machineWithoutStock.vend();
+        assertEquals((Integer)125, machineWithoutStock.getChangeCount());
+        // short changing is a feature of real life machines too
+    }
+
+
+    @Test
+    public void vendReturnsCoinsIfSelectedItemIsNull(){
+        machine.add(Coin.DOLLAR);
+        machine.vend();
+        assertEquals((Integer)0, machine.getAvailableCredit());
+
+    }
+
+    @Test
+    public void vendLeavesCoinsInSlotIfInsufficientFunds(){
+        machine.select(StockItem.C);
+        machine.add(Coin.DOLLAR);
+        machine.vend();
+        assertEquals((Integer)100, machine.getAvailableCredit());
+    }
+
+    @Test
+    public void vendLeavesItemSelectedIfInsufficientFunds(){
+        machine.select(StockItem.C);
+        machine.add(Coin.DOLLAR);
+        machine.vend();
+        assertEquals(StockItem.C, machine.getSelectedItem());
+    }
+
+
+
+
+    @Test
+    public void vendCausesInsertCoinsRequestIfInsufficientFunds(){
+        machine.add(Coin.DOLLAR);
+        machine.select(StockItem.C);
+        machine.vend();
+        assertEquals("Please insert coins", machine.getMessage());
+    }
+
+    @Test
+    public void vendResetsMessageIfSuccessful(){
+        machine.select(StockItem.B);
+        machine.add(Coin.DOLLAR);
+        machine.vend();
+        assertEquals("", machine.getMessage());
+    }
+
+    @Ignore("Need to clarify if warning on minimum coin count, or something else")
+    @Test
+    public void machineWillDisplayChangeWarningIfAnyCoinCountBelowFiveAfterVend(){
+
+    }
 
 }

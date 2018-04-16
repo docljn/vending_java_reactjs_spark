@@ -71,6 +71,15 @@ public class CoinContainer {
         return success;
     }
 
+    public boolean remove(HashMap<Coin,Integer> coinsToRemove) {
+        boolean success = false;
+        for (Coin coin: coinsToRemove.keySet()
+             ) {
+            success = remove(coin, coinsToRemove.get(coin));
+        }
+        return success;
+    }
+
 
     public void resetFloat(int numberOfCoins) {
         for (Coin coin : acceptedCoinTypes) {
@@ -118,6 +127,8 @@ public class CoinContainer {
         }
         return coinsRequired;
     }
+
+
 }
 
 
