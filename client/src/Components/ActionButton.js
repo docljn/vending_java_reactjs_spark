@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class ActionButton extends Component {
 
@@ -11,6 +11,7 @@ class ActionButton extends Component {
     return (
       <div className="ActionButton">
         <input type="submit" value="ActionType"/>
+        "BUTTON HERE!"
       </div>
     );
   }

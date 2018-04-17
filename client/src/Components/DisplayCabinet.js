@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import StockItem from "./StockItem.js";
 
 class DisplayCabinet extends Component {
 
   constructor(props) {
     super(props);
-    // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  // get all stock items here....
 
   render() {
     return (

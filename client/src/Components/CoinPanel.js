@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import Coin from "./Coin.js";
 
 class CoinPanel extends Component {
 
@@ -6,8 +7,6 @@ class CoinPanel extends Component {
     super(props);
     // this.handleSubmit = this.handleSubmit.bind(this);
   }
-
-  // get all coins here
 
   render() {
     return (
