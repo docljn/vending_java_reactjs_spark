@@ -2,8 +2,6 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.util.HashMap;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
@@ -21,23 +19,25 @@ public class VendingMachineTest {
 
 
     @Test
-    public void serviceFillsChangeHopper(){
+    public void serviceFillsChangeHopperWith100OfEachCoin(){
         assertEquals((Integer)14000, machine.getChangeCount());
     }
 
 
     @Test
-    public void serviceFillsDisplayCabinet(){
+    public void serviceFillsDisplayCabinetWithTenOfEachOfThreeItems(){
         assertEquals(3, machine.availableItems().size());
         assertEquals(10, machine.getStockLevel(StockItem.A));
     }
 
+
     @Test
-    public void serviceReturnsCoinsForEmptyCoinSlot(){
+    public void serviceReturnsCoinsInOrderToEmptyCoinSlot(){
         machine.add(Coin.DIME);
         machine.service();
         assertEquals((Integer)0, machine.getAvailableCredit());
     }
+
 
     @Test
     public void addingCoinsFillsCoinSlot(){
@@ -54,12 +54,12 @@ public class VendingMachineTest {
     }
 
 
-
     @Test
     public void selectSetsStockItemToSelected(){
         machine.select(StockItem.A);
         assertEquals(StockItem.A, machine.getSelectedItem());
     }
+
 
     @Test
     public void selectSetsSelectedToNullIfNotInStock(){
@@ -67,15 +67,18 @@ public class VendingMachineTest {
         assertEquals(null, machine.getSelectedItem());
     }
 
+
     @Test
     public void selectReturnsItemPrice(){
         assertEquals((Integer)65, machine.select(StockItem.A));
     }
 
+
     @Test
     public void selectReturnsZeroIfItemNotInStock(){
         assertEquals((Integer)0, machineWithoutStock.select(StockItem.A));
     }
+
 
     @Test
     public void selectDisplaysOutOfStockMessage(){
@@ -83,11 +86,13 @@ public class VendingMachineTest {
         assertEquals("Out of Stock", machineWithoutStock.getMessage());
     }
 
+
     @Test
     public void selectDisplaysPriceIfInStock(){
         machine.select(StockItem.A);
         assertEquals("0.65", machine.getMessage());
     }
+
 
     @Test
     public void coinReturnResetsSelectedToNull(){
@@ -107,7 +112,6 @@ public class VendingMachineTest {
     }
 
 
-
     @Test
     public void vendDecreasesSelectedItemCount(){
         machine.add(Coin.DOLLAR);
@@ -115,6 +119,7 @@ public class VendingMachineTest {
         machine.vend();
         assertEquals(9, machine.getStockLevel(StockItem.B));
     }
+
 
     @Test
     public void vendResetsSelectedItemToNull(){
@@ -152,12 +157,13 @@ public class VendingMachineTest {
 
 
     @Test
-    public void vendReturnsCoinsIfSelectedItemIsNull(){
+    public void vendEmptiesCoinSlotIfSelectedItemIsNull(){
         machine.add(Coin.DOLLAR);
         machine.vend();
         assertEquals((Integer)0, machine.getAvailableCredit());
 
     }
+
 
     @Test
     public void vendLeavesCoinsInSlotIfInsufficientFunds(){
@@ -166,6 +172,7 @@ public class VendingMachineTest {
         machine.vend();
         assertEquals((Integer)100, machine.getAvailableCredit());
     }
+
 
     @Test
     public void vendLeavesItemSelectedIfInsufficientFunds(){
@@ -176,8 +183,6 @@ public class VendingMachineTest {
     }
 
 
-
-
     @Test
     public void vendCausesInsertCoinsRequestIfInsufficientFunds(){
         machine.add(Coin.DOLLAR);
@@ -185,6 +190,7 @@ public class VendingMachineTest {
         machine.vend();
         assertEquals("Please insert coins", machine.getMessage());
     }
+
 
     @Test
     public void vendResetsMessageIfSuccessful(){
@@ -194,10 +200,30 @@ public class VendingMachineTest {
         assertEquals("", machine.getMessage());
     }
 
+    @Test
+    public void vendReturnsSelectedItem(){
+        machine.select(StockItem.B);
+        machine.add(Coin.DOLLAR);
+        assertEquals(StockItem.B, machine.vend());
+    }
+
+
     @Ignore("Need to clarify if warning on minimum coin count, or something else")
     @Test
     public void machineWillDisplayChangeWarningIfAnyCoinCountBelowFiveAfterVend(){
 
+    }
+
+    @Ignore("How to model coins being returned from the machine on coin return or change?")
+    @Test
+    public void machineCanReturnCoinsToUser(){
+        // machine returns selected item, so how can I "return" change/coins too?
+    }
+
+    @Ignore("Spec suggests dollars are not returned from the machine")
+    @Test
+    public void machineDoesNotReturnDollars(){
+        // query this
     }
 
 }

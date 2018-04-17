@@ -84,6 +84,9 @@ public class CoinContainerTest {
 
         HashMap<Coin, Integer> expected = new HashMap<>();
         expected.put(Coin.DOLLAR, 1);
+        expected.put(Coin.QUARTER, 0);
+        expected.put(Coin.DIME, 0);
+        expected.put(Coin.NICKEL, 0);
 
         hopperWithFloat.remove(toRemove);
         assertEquals(expected, hopperWithFloat.getCoinContents());

@@ -1,6 +1,5 @@
 import java.math.BigDecimal;
 import java.util.HashMap;
-import java.util.stream.Collectors;
 
 public class VendingMachine {
 
@@ -85,7 +84,7 @@ public class VendingMachine {
     }
 
 
-    public void vend() {
+    public StockItem vend() {
         StockItem itemToVend = getSelectedItem();
         if (itemToVend != null) {
             Integer changeDueAmount = getAvailableCredit() - itemToVend.getPrice();
@@ -96,13 +95,14 @@ public class VendingMachine {
                 this.displayCabinet.remove(itemToVend);  // you can't select something that isn't in stock
                 this.selectedItem = null;
                 this.changeHopper.remove(coinChange); // returns false if insufficient change
+                this.message = "";
             } else {
                 this.message = "Please insert coins";
             }
         } else {
             coinReturn();
         }
-
+        return itemToVend;
     }
 
     public String getMessage() {
