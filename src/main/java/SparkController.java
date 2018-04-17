@@ -1,6 +1,6 @@
 import static spark.Spark.*;
 
-public class SparkRoutes {
+public class SparkController {
 
     public static void main(String[] args) {
 
