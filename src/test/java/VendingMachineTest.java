@@ -207,6 +207,11 @@ public class VendingMachineTest {
         assertEquals(StockItem.B, machine.vend());
     }
 
+    @Test
+    public void getStateReturnsJSONObject(){
+//        TODO: PENDING
+    }
+
 
     @Ignore("Need to clarify if warning on minimum coin count, or something else")
     @Test
@@ -225,5 +230,7 @@ public class VendingMachineTest {
     public void machineDoesNotReturnDollars(){
         // query this
     }
+
+
 
 }

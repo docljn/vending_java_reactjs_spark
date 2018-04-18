@@ -7,12 +7,17 @@ class DisplayCabinet extends Component {
     super(props);
   }
 
+  render(){
+    const html = this.props.items.map(item => {
+      return (
+        <StockItem name={item.name} price={item.price} count = {item.count} />
+      );
+    });
 
-  render() {
+
     return (
-      <div className="DisplayCabinet">
-        <StockItem/>
-        // render all stock items here
+      <div className="display-cabinet">
+        {html}
       </div>
     );
   }

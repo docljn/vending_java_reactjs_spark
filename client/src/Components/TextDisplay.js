@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class TextDisplay extends Component {
 
@@ -10,7 +10,7 @@ class TextDisplay extends Component {
   render() {
     return (
       <div className="TextDisplay">
-        <p>Text Message To Display</p>
+        <p>{this.props.message}</p>
       </div>
     );
   }

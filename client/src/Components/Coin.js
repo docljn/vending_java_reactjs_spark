@@ -9,9 +9,9 @@ class Coin extends Component {
 
   render() {
     return (
-      <div className="Coin">
-        <img src="placeholder" alt="Coin Name, Value"/>
-        <input type="submit" value="CoinType"/>
+      <div className="coin">
+        <img src="placeholder" alt={"pic of "+this.props.name}/>
+        <input type="submit" value={this.props.value}/>
       </div>
     );
   }

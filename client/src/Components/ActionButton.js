@@ -10,8 +10,7 @@ class ActionButton extends Component {
   render() {
     return (
       <div className="ActionButton">
-        <input type="submit" value="ActionType"/>
-        "BUTTON HERE!"
+        <input type="submit" value={this.props.name} onClick={this.props.onClick}/>
       </div>
     );
   }

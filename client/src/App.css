@@ -11,3 +11,42 @@
   margin: 20px;
   padding: 20px;
 }
+
+.coin {
+  border: 1px dotted blue;
+}
+
+.coin-panel {
+  border: 2px solid blue;
+}
+
+.coin-action {
+  border: 1px dashed blue;
+}
+
+.display-cabinet {
+  border: 2px solid red;
+}
+
+.item-action {
+  border: 1px dashed red;
+}
+
+.stock-item {
+  border: 1px dotted red;
+}
+
+.vending-machine {
+  border: 1px solid black;
+}
+
+/* Layout */
+
+.flex {
+  display: flex;
+}
+
+.flex-vertical {
+  display: flex;
+  flex-direction: column;
+}

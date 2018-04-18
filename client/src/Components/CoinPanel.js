@@ -8,11 +8,17 @@ class CoinPanel extends Component {
     // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  render() {
+  render(){
+    const html = this.props.coins.map(coin => {
+      return (
+        <Coin name={coin.name} value={coin.value} count = {coin.count} />
+      );
+    });
+
+
     return (
-      <div className="CoinPanel">
-        <Coin/>
-        // render all coins here
+      <div className="coin-panel">
+        {html}
       </div>
     );
   }

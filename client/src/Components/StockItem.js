@@ -9,9 +9,9 @@ class StockItem extends Component {
 
   render() {
     return (
-      <div className="StockItem">
-        <img src="placeholder" alt="StockItem Name, Price"/>
-        <input type="submit" value="SelectStockItem ItemName"/>
+      <div className="stock-item">
+        <img src="placeholder" alt={"pic of stock item " + this.props.name}/>
+        <input type="submit" value={this.props.name} price={this.props.price} count={this.props.count}/>
       </div>
     );
   }
