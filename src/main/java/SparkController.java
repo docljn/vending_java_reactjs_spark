@@ -5,6 +5,8 @@ import static spark.Spark.*;
 
 public class SparkController {
 
+
+
     public static void main(String[] args) {
 
         VendingMachine machine = new VendingMachine();
@@ -37,3 +39,6 @@ public class SparkController {
 //Jackson Library:
 //ObjectMapper.writeValueAsString() is used to serialize Object to JSON string.
 //ObjectMapper.readValue() is used to deserialize JSON string to Java Object.
+
+
+//    CORS header 'Access-Control-Allow-Origin'

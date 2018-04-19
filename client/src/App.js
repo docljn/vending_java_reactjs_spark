@@ -10,46 +10,35 @@ class App extends Component {
       coins: [],
       items: []
     };
-    this.updateState = this.updateState.bind(this);
-
-    let itemRequest =
-    fetch("http://localhost:4567/items",{mode: "no-cors"})
-      .then(function(response) {
-        return response.json();
-      })
-      .catch(error => console.error("CAUGHT"+error));
-
-    let coinRequest =
-    fetch("http://localhost:4567/coins",{mode: "no-cors"})
-      .then(function(response) {
-        return response.json();
-      })
-      .catch(error => console.error("CAUGHT"+error));
-
-    let config = {"items": [], "coins":[]};
-    Promise.all([coinRequest, itemRequest]).then(function(values){
-      console.log("VALUES"+values);
-      config.items = values[1];
-      config.coins = values[0];
-      console.log("CONFIG ITEMS"+config.items);
-      return config;
-    }).then(this.updateState(config));
-
-    console.log(this.state.coins);
   }
 
-  updateState(object){
-    console.log(object["coins"]+"COINS");
-    this.state.coins = object["coins"];
-    this.state.items = object["items"];
+  componentDidMount() {
+    this.loadConfig("http://localhost:4567/coins", "coins");
+    this.loadConfig("http://localhost:4567/items", "items");
   }
+
+  loadConfig(url, item) {
+    const request = new XMLHttpRequest();
+    request.open("GET", url);
+    request.addEventListener("load", () => {
+      if (request.status === 200) {
+        const jsonString = request.responseText;
+        const itemArray = JSON.parse(jsonString);
+        console.log(item);
+        this.setState({item: itemArray});
+      }
+    });
+    request.setRequestHeader("Access-Control-Allow-Origin", "localhost:4567")
+    request.send();
+  }
+
 
   render() {
     if(this.state.items.length === 0 || this.state.coins.length === 0){
       return (
         <div className="App">
           <h1>LOADING...</h1>;
-        </div>)
+        </div>);
     } else {
       return (
         <div className="App">
