@@ -10,26 +10,41 @@ class App extends Component {
       coins: [],
       items: []
     };
+    this.loadCoins = this.loadCoins.bind(this);
+    this.loadItems = this.loadItems.bind(this);
   }
 
-  componentDidMount() {
-    this.loadConfig("http://localhost:4567/coins", "coins");
-    this.loadConfig("http://localhost:4567/items", "items");
-  }
 
-  loadConfig(url, item) {
+
+  loadCoins(url) {
     const request = new XMLHttpRequest();
     request.open("GET", url);
-    request.addEventListener("load", () => {
+    request.addEventListener("load", (item) => {
       if (request.status === 200) {
         const jsonString = request.responseText;
         const itemArray = JSON.parse(jsonString);
-        console.log(item);
-        this.setState({item: itemArray});
+        this.setState({coins: itemArray});
       }
     });
-    request.setRequestHeader("Access-Control-Allow-Origin", "localhost:4567")
     request.send();
+  }
+
+  loadItems(url) {
+    const request = new XMLHttpRequest();
+    request.open("GET", url);
+    request.addEventListener("load", (item) => {
+      if (request.status === 200) {
+        const jsonString = request.responseText;
+        const itemArray = JSON.parse(jsonString);
+        this.setState({items: itemArray});
+      }
+    });
+    request.send();
+  }
+
+  componentDidMount() {
+    this.loadCoins("http://localhost:4567/coins");
+    this.loadItems("http://localhost:4567/items");
   }
 
 
@@ -37,7 +52,7 @@ class App extends Component {
     if(this.state.items.length === 0 || this.state.coins.length === 0){
       return (
         <div className="App">
-          <h1>LOADING...</h1>;
+          <h1>LOADING...</h1>
         </div>);
     } else {
       return (

@@ -17,19 +17,40 @@ public class SparkController {
 
         get("/items", (req, res) -> {
             ObjectMapper mapper = new ObjectMapper();
-
             String items = mapper.writeValueAsString(machine.stockedItems());
-
+            System.out.println(machine.stockedItems());
+            res.status(200);
             return items;
+
         } );
 
         get("/coins", (req, res) -> {
             ObjectMapper mapper = new ObjectMapper();
-
             String coins = mapper.writeValueAsString(machine.acceptedCoins());
-
+            res.status(200);
             return coins;
+
         } );
+
+
+        options("/*", (request,response)->{
+
+            String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
+            if (accessControlRequestHeaders != null) {
+                response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
+            }
+
+            String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
+            if(accessControlRequestMethod != null){
+                response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
+            }
+
+            return "OK";
+        });
+
+        before((request,response)->{
+            response.header("Access-Control-Allow-Origin", "*");
+        });
 
 
     }
