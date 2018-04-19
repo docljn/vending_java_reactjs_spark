@@ -5,6 +5,7 @@ class DisplayCabinet extends Component {
 
   constructor(props) {
     super(props);
+    console.log("DisplayCabinetProps " + JSON.stringify(props));
   }
 
   render(){

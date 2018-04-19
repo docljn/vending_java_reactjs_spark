@@ -12,9 +12,6 @@ public class SparkController {
 
         get("/hello", (req, res) -> "Hello World");
 
-        get("/test", (req, res) -> {
-            return machine.getAvailableCredit();
-        } );
 
         get("/items", (req, res) -> {
             ObjectMapper mapper = new ObjectMapper();
@@ -31,6 +28,12 @@ public class SparkController {
 
             return coins;
         } );
+
+
     }
 }
 
+
+//Jackson Library:
+//ObjectMapper.writeValueAsString() is used to serialize Object to JSON string.
+//ObjectMapper.readValue() is used to deserialize JSON string to Java Object.
