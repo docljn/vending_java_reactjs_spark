@@ -11,7 +11,7 @@ class CoinPanel extends Component {
   render(){
     const html = this.props.coins.map(coin => {
       return (
-        <Coin name={coin.name} value={coin.value} count = {coin.count} />
+        <Coin name={coin.name} value={coin.value} count = {coin.count} onClick={this.props.handleCoinClick} key={this.props.coins.indexOf(coin)} onClick={this.props.onClick}/>
       );
     });
 

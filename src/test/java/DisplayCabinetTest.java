@@ -41,11 +41,11 @@ public class DisplayCabinetTest {
         assertEquals(Integer.valueOf(10), displayCabinet.getItemCount(StockItem.A));
     }
 
-//    TODO: Check if this method is needed for fuctionality
+//    TODO: Check if this method is needed for functionality
     @Test
     public void canReturnItemsStocked(){
-        ArrayList<StockItem> stockedItems = displayCabinet.getStockItemTypes();
-        assertEquals(3, stockedItems.size());
+        StockItem[] stockedItems = displayCabinet.getStockItemTypes();
+        assertEquals(3, stockedItems.length);
     }
 
     @Test

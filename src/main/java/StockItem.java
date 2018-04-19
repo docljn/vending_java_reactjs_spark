@@ -1,5 +1,6 @@
 // currently assuming the price will not change without a manual reprogram of the machine
 
+
 public enum StockItem {
 
     A (65, "A"),

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class Coin extends Component {
 
@@ -11,7 +11,7 @@ class Coin extends Component {
     return (
       <div className="coin">
         <img src="placeholder" alt={"pic of "+this.props.name}/>
-        <input type="submit" value={this.props.value}/>
+        <input type="submit" value={this.props.value} onClick={this.props.onClick}/>
       </div>
     );
   }

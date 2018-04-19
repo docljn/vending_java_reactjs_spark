@@ -30,8 +30,8 @@ public class DisplayCabinet {
         }
     }
 
-    public ArrayList<StockItem> getStockItemTypes() {
-        return new ArrayList<>(Arrays.asList(this.stockItemTypes));
+    public StockItem[] getStockItemTypes() {
+        return this.stockItemTypes;
     }
 
 

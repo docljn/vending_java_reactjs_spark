@@ -12,22 +12,19 @@ class VendingMachine extends Component {
     this.state = {
       message: "Please make a selection",
       credit: "0.00",
-      selected:{},
+      selected:{},  // not sure if I even need this!?
       items:[
         {
           "name": "A",
           "price": 65,
-          "count": 1
         },
         {
           "name": "B",
           "price": 100,
-          "count": 1
         },
         {
           "name": "C",
           "price": 100,
-          "count": 1
         }
       ],
 
@@ -48,29 +45,34 @@ class VendingMachine extends Component {
         }
       ]
     };
+    this.handleCoinClick = this.handleCoinClick.bind(this);
+    this.handleSelectClick = this.handleSelectClick.bind(this);
+    this.handleServiceClick = this.handleServiceClick.bind(this);
+    this.handleCoinReturnClick = this.handleCoinReturnClick.bind(this);
+    this.handleVendClick = this.handleVendClick.bind(this);
 
     // get all details of vending machine and set state here.....
-    // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   render() {
     return (
       <div className="vending-machine">
+        <h1>Vending Machine</h1>
         <div className="user-action flex">
           <div className="item-action flex-vertical">
             <TextDisplay message={this.state.message}/>
-            <DisplayCabinet items = {this.state.items}/>
-            <ActionButton name="vend" onClick = "some method" />
+            <DisplayCabinet items={this.state.items} onClick={this.handleSelectClick}/>
+            <ActionButton name="vend" onClick = {this.handleVendClick} />
           </div>
 
           <div className="coin-action flex-vertical">
             <TextDisplay message={this.state.credit}/>
-            <CoinPanel coins = {this.state.coins}/>
-            <ActionButton name="coin return" onClick = "some method"/>
+            <CoinPanel coins={this.state.coins} onClick={this.handleCoinClick}/>
+            <ActionButton name="coin return" onClick = {this.handleCoinClick}/>
           </div>
         </div>
         <div className="service-action">
-          <ActionButton name="service" onClick = "some method"/>
+          <ActionButton name="service" onClick = {this.handleServiceClick}/>
         </div>
       </div>
 
@@ -78,8 +80,53 @@ class VendingMachine extends Component {
     );
   }
 
-  handleVendButtonClick() {
-    // post request to /vend:selectedItem
+  initialize(){
+    // call service
+    // setstate items
+    const availableItems =
+    this.setState(prevState => {
+      return {total: prevState.total + this.props.depositAmount};
+    });
+    // setstate coins
+
+  }
+
+  handleVendClick(event) {
+    event.preventDefault();
+    console.log(event.target);
+
+    // put request to /vend/:selectedItem
+  }
+
+  handleCoinReturnClick(event) {
+    event.preventDefault();
+    console.log(event.target);
+
+
+    // put request to /return
+  }
+
+  handleServiceClick(event) {
+    // put request to /service
+    event.preventDefault();
+
+    console.log(event.target);
+
+
+  }
+
+  handleSelectClick(event){
+    event.preventDefault();
+    console.log(event.target);
+
+    // put request to /select/:clickedItem
+  }
+
+  handleCoinClick(event){
+    event.preventDefault();
+    console.log(event.target);
+
+    // put request to /coin/:clickedCoin
   }
 
 }

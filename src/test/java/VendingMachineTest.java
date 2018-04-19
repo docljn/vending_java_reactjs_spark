@@ -23,6 +23,18 @@ public class VendingMachineTest {
         assertEquals((Integer)14000, machine.getChangeCount());
     }
 
+    @Test
+    public void machineAcceptsStatedCoins(){
+        System.out.println(machine.acceptedCoins());
+        assertEquals(4, machine.acceptedCoins().length);
+    }
+
+    @Test
+    public void machineStocksStatedItems(){
+        System.out.println(machine.stockedItems()[0].getPrice());
+        assertEquals(3, machine.stockedItems().length);
+    }
+
 
     @Test
     public void serviceFillsDisplayCabinetWithTenOfEachOfThreeItems(){
@@ -157,10 +169,10 @@ public class VendingMachineTest {
 
 
     @Test
-    public void vendEmptiesCoinSlotIfSelectedItemIsNull(){
+    public void vendLeavesCoinInSlotIfSelectedItemIsNull(){
         machine.add(Coin.DOLLAR);
         machine.vend();
-        assertEquals((Integer)0, machine.getAvailableCredit());
+        assertEquals((Integer)100, machine.getAvailableCredit());
 
     }
 
@@ -205,11 +217,6 @@ public class VendingMachineTest {
         machine.select(StockItem.B);
         machine.add(Coin.DOLLAR);
         assertEquals(StockItem.B, machine.vend());
-    }
-
-    @Test
-    public void getStateReturnsJSONObject(){
-//        TODO: PENDING
     }
 
 

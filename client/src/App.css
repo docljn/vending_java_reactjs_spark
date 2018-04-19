@@ -37,6 +37,8 @@
 }
 
 .vending-machine {
+  width: 600px;
+  height: 500px;
   border: 1px solid black;
 }
 
@@ -44,9 +46,11 @@
 
 .flex {
   display: flex;
+  align-items: stretch;
 }
 
 .flex-vertical {
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
 }

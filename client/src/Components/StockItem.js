@@ -11,7 +11,7 @@ class StockItem extends Component {
     return (
       <div className="stock-item">
         <img src="placeholder" alt={"pic of stock item " + this.props.name}/>
-        <input type="submit" value={this.props.name} price={this.props.price} count={this.props.count}/>
+        <input type="submit" value={this.props.name} price={this.props.price} count={this.props.count} onClick={this.props.onClick}/>
       </div>
     );
   }

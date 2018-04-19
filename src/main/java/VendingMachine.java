@@ -1,4 +1,5 @@
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.HashMap;
 
 public class VendingMachine {
@@ -31,6 +32,9 @@ public class VendingMachine {
         coinReturn();
     }
 
+    public Coin[] acceptedCoins() {
+        return this.coinSlot.getAcceptedCoins();
+    }
 
     public Integer getAvailableCredit() {
         return this.coinSlot.getCashCount();
@@ -45,6 +49,10 @@ public class VendingMachine {
     }
 
 
+
+    public StockItem[] stockedItems() {
+        return this.displayCabinet.getStockItemTypes();
+    }
 
     public HashMap<StockItem,Integer> availableItems() {
         return this.displayCabinet.getAvailableItems();
@@ -99,8 +107,6 @@ public class VendingMachine {
             } else {
                 this.message = "Please insert coins";
             }
-        } else {
-            coinReturn();
         }
         return itemToVend;
     }
@@ -109,7 +115,6 @@ public class VendingMachine {
 
         return this.message;
     }
-
 
 
 }

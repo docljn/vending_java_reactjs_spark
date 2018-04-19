@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 // Coins must be declared in ascending order for this to work: largest coin is last in list....
 public enum Coin {
     NICKEL (5),
@@ -19,6 +17,8 @@ public enum Coin {
     public int getValue() {
         return value();
     }
+
+
 
 
 

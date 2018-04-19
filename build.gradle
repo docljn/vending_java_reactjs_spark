@@ -30,6 +30,7 @@ dependencies {
     // Logging
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.+'
     compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.+'
+
 }
 
 // In this section you declare where to find the dependencies of your project
