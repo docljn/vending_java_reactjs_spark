@@ -10,7 +10,15 @@ class App extends Component {
       coins: [],
       items: []
     };
-    this.updateState = this.updateState.bind(this);
+    this.setConfig = this.setConfig.bind(this);
+
+    let testRequest = fetch("http://localhost:4567/items",{mode: "no-cors"})
+      .then(function(response) {
+        return response.json();
+      })
+      .catch(error => console.error(error));
+
+    console.log("TEST"+JSON.stringify(testRequest));
 
     let itemRequest =
     fetch("http://localhost:4567/items",{mode: "no-cors"})
@@ -31,14 +39,13 @@ class App extends Component {
       config["items"] = values[1];
       config["coins"] = values[0];
       return config;
-    }).then(this.updateState(config));
+    }).then(this.setConfig(config));
   }
 
-  updateState(object){
-    this.setState({
-      coins: object["coins"],
-      items: object["items"]
-    });
+  setConfig(object){
+    console.log(object.coins[0]);
+    this.state.coins = object.coins;
+    this.state.items = object.items;
   }
 
   render() {
@@ -47,7 +54,7 @@ class App extends Component {
     } else {
       return (
         <div className="App">
-        <VendingMachine coins={this.state.coins} items={this.state.items}/>
+          <VendingMachine coins={this.state.coins} items={this.state.items}/>
         </div>
       );
     }
