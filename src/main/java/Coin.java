@@ -1,27 +1,32 @@
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 // Coins must be declared in ascending order for this to work: largest coin is last in list....
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
+
 public enum Coin {
-    NICKEL (5),
-    DIME (10),
-    QUARTER (25),
-    DOLLAR (100);
+    NICKEL (5, "nickel"),
+    DIME (10, "dime"),
+    QUARTER (25, "quarter"),
+    DOLLAR (100, "dollar");
 
     private final int value;
+    private final String type;
 
-    Coin(int value) {
+    Coin(int value, String type) {
         this.value = value;
+        this.type = type;
     }
 
-    private int value() { return value; }
 
 
     public int getValue() {
-        return value();
+        return value;
     }
 
 
-
-
-
+    public String getType() {
+        return type;
+    }
 }
 
 // reference: https://docs.oracle.com/javase/tutorial/java/javaOO/enum.html

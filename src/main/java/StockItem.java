@@ -1,6 +1,8 @@
 // currently assuming the price will not change without a manual reprogram of the machine
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum StockItem {
 
     A (65, "A"),

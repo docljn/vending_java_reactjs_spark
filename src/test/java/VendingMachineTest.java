@@ -31,7 +31,6 @@ public class VendingMachineTest {
 
     @Test
     public void machineStocksStatedItems(){
-        System.out.println(machine.stockedItems()[0].getPrice());
         assertEquals(3, machine.stockedItems().length);
     }
 

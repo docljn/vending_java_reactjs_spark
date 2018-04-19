@@ -1,8 +1,5 @@
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import static spark.Spark.*;
 
@@ -20,16 +17,19 @@ public class SparkController {
         } );
 
         get("/items", (req, res) -> {
-            Gson gson = new Gson();
-//            TypeToken<HashMap<StockItem, Integer>> stockItems = new TypeToken<HashMap<StockItem, Integer>>(){};
-            for (StockItem item:machine.stockedItems()) {
+            ObjectMapper mapper = new ObjectMapper();
 
-            }
-
-            String items = gson.toJson(machine.stockedItems());
-            System.out.println("availableItems " + items);
+            String items = mapper.writeValueAsString(machine.stockedItems());
 
             return items;
+        } );
+
+        get("/coins", (req, res) -> {
+            ObjectMapper mapper = new ObjectMapper();
+
+            String coins = mapper.writeValueAsString(machine.acceptedCoins());
+
+            return coins;
         } );
     }
 }

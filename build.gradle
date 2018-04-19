@@ -24,8 +24,10 @@ dependencies {
     // Use Spark web framework
     compile "com.sparkjava:spark-core:2.7.2"
 
-    // Use GSON library
-    compile 'com.google.code.gson:gson:2.3.1'
+    // Use Jackson library
+    compile 'com.fasterxml.jackson.core:jackson-core:2.9.5'
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.9.5'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.5'
 
     // Logging
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.+'

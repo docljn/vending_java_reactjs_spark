@@ -10,4 +10,9 @@ public class CoinTest {
         public void testQuarterReturnsCentsValue() {
             assertEquals(25, coin.QUARTER.getValue());
         }
+
+        @Test
+        public void testNickelReturnsType(){
+            assertEquals("nickel", Coin.NICKEL.getType());
+        }
 }
