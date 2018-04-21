@@ -41,7 +41,7 @@ public class VendingMachine {
     }
 
     public Integer getCashCount() {
-    return this.coinHopper.getCashCount();
+        return this.coinHopper.getCashCount();
     }
 
     public Integer getChangeCount() {
@@ -91,6 +91,21 @@ public class VendingMachine {
         }
         return price;
     }
+
+
+    public Integer select(String itemSelector) {
+        Integer price = 0;
+        for (StockItem item: stockedItems()) {
+            if (item.getSelector() == itemSelector){
+                price = select(item);
+            }
+        }
+        return price;
+
+//        TODO: may need to rethink this, or guard against null pointer exceptions
+    }
+
+
 
     public StockItem getSelectedItem() {
         return this.selectedItem;

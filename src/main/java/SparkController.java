@@ -72,6 +72,20 @@ public class SparkController {
         } );
 
 
+        post("/item/:itemSelector", (req, res) -> {
+            String itemSelector = req.params(":itemSelector");
+            System.out.println("STRING "+itemSelector);
+            Integer price = machine.select(itemSelector);
+            System.out.println("PRICE "+price);
+            ObjectMapper mapper = new ObjectMapper();
+            System.out.println("selected"+machine.getSelectedItem());
+            res.body("selectedItem: " + machine.getSelectedItem());
+            res.status(200);
+
+            return price;
+
+        } );
+
 
 
 

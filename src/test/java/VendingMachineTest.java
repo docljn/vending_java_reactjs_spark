@@ -79,6 +79,17 @@ public class VendingMachineTest {
         assertEquals(StockItem.A, machine.getSelectedItem());
     }
 
+    @Test
+    public void selectWorksWithStringSelector(){
+        machine.select("A");
+        assertEquals(StockItem.A, machine.getSelectedItem());
+    }
+
+    @Test
+    public void selectWithStringSelectorReturnsPrice(){
+        assertEquals((Integer)65, machine.select("A"));
+    }
+
 
     @Test
     public void selectSetsSelectedToNullIfNotInStock(){

@@ -70,25 +70,26 @@ class VendingMachine extends Component {
   }
 
 
-  handleServiceClick(event) {
-    // put request to /service
+  handleCoinClick(event){
     event.preventDefault();
+    let coinvalue = event.target.value;
+    this.postOnCoinClick("http://localhost:4567/coin/"+coinvalue);
     console.log(event.target);
-
-
   }
 
   handleItemClick(event){
     event.preventDefault();
+    let itemSelector = event.target.id;
+    console.log("itemSelector"+itemSelector);
+    this.postOnItemClick("http://localhost:4567/item/"+itemSelector);
     console.log(event.target);
 
     // put request to /select/:clickedItem
   }
 
-  handleCoinClick(event){
+  handleServiceClick(event) {
+    // put request to /service
     event.preventDefault();
-    let coinvalue = event.target.value;
-    this.postOnCoinClick("http://localhost:4567/coin/"+coinvalue);
     console.log(event.target);
   }
 
@@ -141,6 +142,21 @@ class VendingMachine extends Component {
     });
     request.send();
     console.log("request status"+request.status);
+  }
+
+  postOnItemClick(url) {
+    const request = new XMLHttpRequest();
+    request.open("POST", url);
+    request.addEventListener("load", () => {
+      if (request.status === 200) {
+        const jsonString = request.responseText;
+        const selected = JSON.parse(jsonString);
+        this.setState({selected: selected});
+      }
+      console.log("ITEM STATUS" + request.status);
+
+    });
+    request.send();
   }
 
 }
