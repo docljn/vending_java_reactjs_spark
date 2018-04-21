@@ -105,14 +105,15 @@ class VendingMachine extends Component {
         const credit = JSON.parse(jsonString);
         this.setState({credit: credit});
       }
+      console.log("Coin STATUS" + request.status);
+      
     });
     request.send();
-    console.log("Coin STATUS" + request.status);
   }
 
 
   postOnCoinReturnClick() {
-    const url = "http://localhost:4567/coin/return";
+    const url = "http://localhost:4567/coins/return";
     const request = new XMLHttpRequest();
     request.open("POST", url);
     request.addEventListener("load", () => {
@@ -121,9 +122,10 @@ class VendingMachine extends Component {
         const credit = JSON.parse(jsonString);
         this.setState({credit: credit, message: "Please make a selection"});
       }
+      console.log("return request status"+request.status);
+
     });
     request.send();
-    console.log("return request status"+request.status);
   }
 
   postOnVendClick() {

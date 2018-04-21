@@ -34,23 +34,23 @@ public class SparkController {
 
         } );
 
-//        post("/coin/return", (req, res) -> {
-//            machine.coinReturn();
-//            ObjectMapper mapper = new ObjectMapper();
-//            String credit = mapper.writeValueAsString(machine.getAvailableCredit());
-//            res.status(200);
-//            res.body("credit: " + credit);
-//            return credit;
-//
-//        } );
+        post("/coins/return", (req, res) -> {
+            machine.coinReturn();
+            ObjectMapper mapper = new ObjectMapper();
+            String credit = mapper.writeValueAsString(machine.getAvailableCredit());
+            res.status(200);
+            System.out.println("CREDIT" + credit);
+            res.body("credit: " + credit);
+            return credit;
+
+        } );
 
 
         post("/coin/:value", (req, res) -> {
-            Map params = req.params();
+            String coinValue = req.params(":value");
 
-            Object coinValue = params.get(":value");
-            Integer value = (Integer)coinValue;
-            machine.add(100);
+            Integer value = Integer.valueOf(coinValue);
+            machine.add(value);
             ObjectMapper mapper = new ObjectMapper();
             String availableCredit = mapper.writeValueAsString(machine.getAvailableCredit());
             res.body("credit: " + availableCredit);
