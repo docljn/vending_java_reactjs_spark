@@ -12,7 +12,6 @@ class VendingMachine extends Component {
     this.state = {
       message: "Please make a selection",
       credit: "0.00",
-      selected:{},  // not sure if I even need this!?
       coins: this.props.coins,
       items: this.props.items
     };
@@ -120,8 +119,9 @@ class VendingMachine extends Component {
     request.addEventListener("load", () => {
       if (request.status === 200) {
         const jsonString = request.responseText;
-        const credit = JSON.parse(jsonString);
-        this.setState({credit: credit, message: "Please make a selection"});
+        const machineStatus = JSON.parse(jsonString);
+        console.log(machineStatus);
+        this.setState(machineStatus);
       }
       console.log("return request status"+request.status);
 
@@ -140,7 +140,7 @@ class VendingMachine extends Component {
         this.setState({credit: credit});
       }
       console.log("request status"+request.status);
-      
+
     });
     request.send();
   }

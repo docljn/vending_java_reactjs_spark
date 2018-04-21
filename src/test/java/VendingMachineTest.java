@@ -122,6 +122,14 @@ public class VendingMachineTest {
         assertEquals(null, machine.getSelectedItem());
     }
 
+    @Test
+    public void coinReturnResetsMessageToDefault(){
+        machine.add(Coin.DOLLAR);
+        machine.select(StockItem.A);
+        machine.coinReturn();
+        assertEquals("Please select an item.", machine.getMessage());
+    }
+
 
     @Test
     public void vendTransfersCoinsFromSlotToHopper(){
@@ -275,7 +283,7 @@ public class VendingMachineTest {
         Map<String, String> expected = new HashMap<>();
         expected.put("availableCredit", "100");
         expected.put("selectedItem", "");
-        expected.put("message", "");
+        expected.put("message", "Please select an item.");
         expected.put("itemsToCollect", "");
 
         System.out.println(machine.getStatus());

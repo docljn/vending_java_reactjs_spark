@@ -74,7 +74,7 @@ public class VendingMachine {
 //        I'm not modelling the purchaser, so the coins effectively vanish here and the machine resets
         this.coinSlot.transferAllCoins(new CoinContainer());
         this.selectedItem = null;
-        this.message = "";
+        this.message = "Please select an item.";
         this.itemsToCollect = "";
     }
 
