@@ -1,5 +1,6 @@
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 
 import static spark.Spark.*;
@@ -36,12 +37,12 @@ public class SparkController {
 
         post("/coins/return", (req, res) -> {
             machine.coinReturn();
-            ObjectMapper mapper = new ObjectMapper();
-            String credit = mapper.writeValueAsString(machine.getAvailableCredit());
+            Gson gson = new Gson();
+
+            String machineStatus = gson.toJson(machine.getStatus());
             res.status(200);
-            System.out.println("CREDIT" + credit);
-            res.body("credit: " + credit);
-            return credit;
+            System.out.println("STATUS" + machineStatus);
+            return machineStatus;
 //TODO: eventually, return machine status in full to include messages etc
         } );
 

@@ -1,8 +1,10 @@
+import com.google.gson.Gson;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -242,7 +244,7 @@ public class VendingMachineTest {
     @Test
     public void getMessageReturnsMessage(){
         machine.select("A");
-        assertEquals("Please insert coins.", machine.getMessage());
+        assertEquals("Price is 65.", machine.getMessage());
     }
 
     @Test
@@ -253,22 +255,31 @@ public class VendingMachineTest {
         assertEquals("Please collect B.", machine.getItemsToCollect());
     }
 
-    @Ignore
     @Test
     public void machineGetStatusReturnsSummaryHashForAPI(){
         machine.add(100);
         machine.select("B");
-        HashMap<String, String> expected = new HashMap<>();
+        Map<String, String> expected = new HashMap<>();
         expected.put("availableCredit", "100");
         expected.put("selectedItem", "B");
+        expected.put("message", "Price is 100.");
+        expected.put("itemsToCollect", "");
+
+        System.out.println(machine.getStatus());
+        assertEquals(expected, machine.getStatus());
+    }
+
+    @Test
+    public void machineGetStatusReturnsSummaryHashForAPIIfNullValuesPresent(){
+        machine.add(100);
+        Map<String, String> expected = new HashMap<>();
+        expected.put("availableCredit", "100");
+        expected.put("selectedItem", "");
         expected.put("message", "");
         expected.put("itemsToCollect", "");
-        assertEquals(expected, machine.getStatus());
 
-//        availableCredit: machine.getAvailableCredit().toString();
-//        selectedItem: machine.getSelectedItem().toString();
-//        message: machine.getMessage();
-//        itemsToCollect: machine.getItemsToCollect;
+        System.out.println(machine.getStatus());
+        assertEquals(expected, machine.getStatus());
     }
 
 

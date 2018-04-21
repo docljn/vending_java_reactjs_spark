@@ -15,9 +15,9 @@ public class VendingMachine {
         this.changeHopper = new CoinContainer();
         this.displayCabinet = new DisplayCabinet();
         this.selectedItem = null;
+        //        TODO: may need to rethink this, or guard against null pointer exceptions
         this.message = "";
         this.itemsToCollect = "";
-        //        TODO: may need to rethink this, or guard against null pointer exceptions
 
     }
 
@@ -71,9 +71,11 @@ public class VendingMachine {
     }
 
     public void coinReturn() {
-//        I'm not modelling the purchaser, so the coins effectively vanish here
+//        I'm not modelling the purchaser, so the coins effectively vanish here and the machine resets
         this.coinSlot.transferAllCoins(new CoinContainer());
         this.selectedItem = null;
+        this.message = "";
+        this.itemsToCollect = "";
     }
 
 
@@ -81,7 +83,7 @@ public class VendingMachine {
 //        TODO: Consider how to handle out of stock situation: currently setting message
         if (this.displayCabinet.inStock(selectedItem)) {
             this.selectedItem = selectedItem;
-            this.message = "Please insert coins.";
+            this.message = "Price is " +selectedItem.getPrice()+".";
         } else {
             this.message = "Out of Stock";
         }
@@ -139,7 +141,13 @@ public class VendingMachine {
     public HashMap<String,String> getStatus() {
         HashMap<String, String> status = new HashMap<>();
         status.put("availableCredit", getAvailableCredit().toString());
-        status.put("selectedItem", getSelectedItem().getSelector());
+        // guard against null pointer exception for getSelectedItem();
+        String item = "";
+        if (getSelectedItem() != null) {
+            item = getSelectedItem().getSelector();
+        }
+        status.put("selectedItem", item);
+        // end of guard
         status.put("message", getMessage());
         status.put("itemsToCollect", getItemsToCollect());
         return status;
