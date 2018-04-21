@@ -11,7 +11,7 @@ class VendingMachine extends Component {
     super(props);
     this.state = {
       message: "Please make a selection",
-      credit: "0.00",
+      availableCredit: "0.00",
       coins: this.props.coins,
       items: this.props.items
     };
@@ -37,13 +37,16 @@ class VendingMachine extends Component {
           </div>
 
           <div className="coin-action flex-vertical">
-            <TextDisplay message={"Available credit "+this.state.credit}/>
+            <TextDisplay message={"Available credit "+this.state.availableCredit}/>
             <CoinPanel coins={this.props.coins} coinClick={this.handleCoinClick}/>
             <ActionButton name="coin return" onClick={this.handleCoinReturnClick}/>
           </div>
         </div>
         <div className="service-action">
           <ActionButton name="service" onClick = {this.handleServiceClick}/>
+        </div>
+        <div className="out">
+          <TextDisplay message={this.state.itemsToCollect}/>
         </div>
       </div>
 
@@ -103,7 +106,7 @@ class VendingMachine extends Component {
       if (request.status === 200) {
         const jsonString = request.responseText;
         const credit = JSON.parse(jsonString);
-        this.setState({credit: credit});
+        this.setState({availableCredit: credit});
       }
       console.log("Coin STATUS" + request.status);
 
@@ -136,8 +139,8 @@ class VendingMachine extends Component {
     request.addEventListener("load", () => {
       if (request.status === 200) {
         const jsonString = request.responseText;
-        const credit = JSON.parse(jsonString);
-        this.setState({credit: credit});
+        const machineStatus = JSON.parse(jsonString);
+        this.setState(machineStatus);
       }
       console.log("request status"+request.status);
 
@@ -151,8 +154,8 @@ class VendingMachine extends Component {
     request.addEventListener("load", () => {
       if (request.status === 200) {
         const jsonString = request.responseText;
-        const selected = JSON.parse(jsonString);
-        this.setState({selected: selected});
+        const machineState = JSON.parse(jsonString);
+        this.setState(machineState);
       }
       console.log("ITEM STATUS" + request.status);
 

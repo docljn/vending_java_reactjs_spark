@@ -13,6 +13,7 @@ public class SparkController {
 
         VendingMachine machine = new VendingMachine();
         machine.service();
+        Gson gson = new Gson();
 
         get("/hello", (req, res) -> "Hello World");
 
@@ -37,7 +38,6 @@ public class SparkController {
 
         post("/coins/return", (req, res) -> {
             machine.coinReturn();
-            Gson gson = new Gson();
 
             String machineStatus = gson.toJson(machine.getStatus());
             res.status(200);
@@ -66,11 +66,9 @@ public class SparkController {
 
         post("/vend", (req, res) -> {
             machine.vend();
-            ObjectMapper mapper = new ObjectMapper();
-            String availableCredit = mapper.writeValueAsString(machine.getAvailableCredit());
-            System.out.println("availableCredit "+availableCredit);
+            String machineStatus = gson.toJson(machine.getStatus());
             res.status(200);
-            return availableCredit;
+            return machineStatus;
         } );
 
 
@@ -78,15 +76,9 @@ public class SparkController {
             String itemSelector = req.params("itemSelector");
 
             machine.select(itemSelector);
-
-            ObjectMapper mapper = new ObjectMapper();
-            String priceString = mapper.writeValueAsString(machine.getSelectedItem().getPrice());
-            System.out.println("PRICE "+priceString);
-
-            System.out.println("selected"+machine.getSelectedItem());
-//            res.body("selectedItem: " + machine.getSelectedItem());
+            String machineStatus = gson.toJson(machine.getStatus());
             res.status(200);
-            return priceString;
+            return machineStatus;
 
         } );
 
