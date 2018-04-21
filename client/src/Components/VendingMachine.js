@@ -17,7 +17,7 @@ class VendingMachine extends Component {
       items: this.props.items
     };
     this.handleCoinClick = this.handleCoinClick.bind(this);
-    this.handleSelectClick = this.handleSelectClick.bind(this);
+    this.handleItemClick = this.handleItemClick.bind(this);
     this.handleServiceClick = this.handleServiceClick.bind(this);
     this.handleCoinReturnClick = this.handleCoinReturnClick.bind(this);
     this.handleVendClick = this.handleVendClick.bind(this);
@@ -33,7 +33,7 @@ class VendingMachine extends Component {
         <div className="user-action flex">
           <div className="item-action flex-vertical">
             <TextDisplay message={this.state.message}/>
-            <DisplayCabinet items={this.props.items} selectClick={this.handleSelectClick}/>
+            <DisplayCabinet items={this.props.items} itemClick={this.handleItemClick}/>
             <ActionButton name="vend" onClick = {this.handleVendClick} />
           </div>
 
@@ -78,7 +78,7 @@ class VendingMachine extends Component {
 
   }
 
-  handleSelectClick(event){
+  handleItemClick(event){
     event.preventDefault();
     console.log(event.target);
 
@@ -106,7 +106,7 @@ class VendingMachine extends Component {
         this.setState({credit: credit});
       }
       console.log("Coin STATUS" + request.status);
-      
+
     });
     request.send();
   }
