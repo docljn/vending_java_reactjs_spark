@@ -139,9 +139,10 @@ class VendingMachine extends Component {
         const credit = JSON.parse(jsonString);
         this.setState({credit: credit});
       }
+      console.log("request status"+request.status);
+      
     });
     request.send();
-    console.log("request status"+request.status);
   }
 
   postOnItemClick(url) {

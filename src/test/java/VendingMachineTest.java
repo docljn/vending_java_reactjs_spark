@@ -81,14 +81,19 @@ public class VendingMachineTest {
 
     @Test
     public void selectWorksWithStringSelector(){
-        machine.select("A");
-        assertEquals(StockItem.A, machine.getSelectedItem());
+        machine.select("C");
+        assertEquals(StockItem.C, machine.getSelectedItem());
     }
 
+    // added to try and debug server errors
     @Test
-    public void selectWithStringSelectorReturnsPrice(){
-        assertEquals((Integer)65, machine.select("A"));
+    public void selectWorksWithStringVariableSelector(){
+        String selector = "C";
+        machine.select(selector);
+        assertEquals(StockItem.C, machine.getSelectedItem());
     }
+
+
 
 
     @Test
@@ -103,9 +108,14 @@ public class VendingMachineTest {
         assertEquals((Integer)65, machine.select(StockItem.A));
     }
 
+    @Test
+    public void selectWithStringSelectorReturnsPrice(){
+        assertEquals((Integer)100, machine.select("B"));
+    }
+
 
     @Test
-    public void selectReturnsZeroIfItemNotInStock(){
+    public void selectReturnsPriceZeroIfItemNotInStock(){
         assertEquals((Integer)0, machineWithoutStock.select(StockItem.A));
     }
 

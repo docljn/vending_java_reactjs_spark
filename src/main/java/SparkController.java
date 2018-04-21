@@ -1,7 +1,6 @@
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.util.Map;
 
 import static spark.Spark.*;
 
@@ -34,6 +33,7 @@ public class SparkController {
 
         } );
 
+
         post("/coins/return", (req, res) -> {
             machine.coinReturn();
             ObjectMapper mapper = new ObjectMapper();
@@ -64,25 +64,40 @@ public class SparkController {
 
 
         post("/vend", (req, res) -> {
+            machine.vend();
             ObjectMapper mapper = new ObjectMapper();
             String availableCredit = mapper.writeValueAsString(machine.getAvailableCredit());
+            System.out.println("availableCredit "+availableCredit);
             res.status(200);
             return availableCredit;
-
         } );
 
 
         post("/item/:itemSelector", (req, res) -> {
-            String itemSelector = req.params(":itemSelector");
-            System.out.println("STRING "+itemSelector);
-            Integer price = machine.select(itemSelector);
-            System.out.println("PRICE "+price);
+//            TODO: why doesn't it work with Integer price = machine.select(selector);
+            String selector = req.params(":itemSelector");
+            Integer price = 0;
+            if (selector.equals("A")){
+                price = machine.select("A");
+            }
+            if (selector.equals("B")){
+                price = machine.select("B");
+
+            }
+            if (selector.equals("C")){
+                price = machine.select("C");
+
+            }
+
             ObjectMapper mapper = new ObjectMapper();
+            String priceString = mapper.writeValueAsString(price);
+            System.out.println("PRICE "+priceString);
+
             System.out.println("selected"+machine.getSelectedItem());
             res.body("selectedItem: " + machine.getSelectedItem());
             res.status(200);
 
-            return price;
+            return priceString;
 
         } );
 
