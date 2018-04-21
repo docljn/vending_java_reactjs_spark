@@ -35,6 +35,14 @@ public class CoinContainerTest {
     }
 
     @Test
+    public void canAddAcceptedCoinMatchingValue(){
+        hopper.add(100);
+        HashMap<Coin, Integer> expected = new HashMap<>();
+        expected.put(Coin.DOLLAR, 1);
+        assertEquals(expected, hopper.getCoinContents());
+    }
+
+    @Test
     public void canAddCoins(){
         hopper.add(Coin.DIME);
         assertEquals((Integer)1, hopper.getCount(Coin.DIME));
@@ -45,6 +53,8 @@ public class CoinContainerTest {
         hopper.add(Coin.NICKEL, 10);
         assertEquals((Integer)10, hopper.getCount(Coin.NICKEL));
     }
+
+
 
     @Test
     public void canCalculateTotalCashCount(){

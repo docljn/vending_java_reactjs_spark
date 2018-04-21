@@ -15,4 +15,5 @@ public class CoinTest {
         public void testNickelReturnsType(){
             assertEquals("nickel", Coin.NICKEL.getType());
         }
+        
 }

@@ -1,6 +1,8 @@
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.util.Map;
+
 import static spark.Spark.*;
 
 public class SparkController {
@@ -31,6 +33,47 @@ public class SparkController {
             return coins;
 
         } );
+
+//        post("/coin/return", (req, res) -> {
+//            machine.coinReturn();
+//            ObjectMapper mapper = new ObjectMapper();
+//            String credit = mapper.writeValueAsString(machine.getAvailableCredit());
+//            res.status(200);
+//            res.body("credit: " + credit);
+//            return credit;
+//
+//        } );
+
+
+        post("/coin/:value", (req, res) -> {
+            Map params = req.params();
+
+            Object coinValue = params.get(":value");
+            Integer value = (Integer)coinValue;
+            machine.add(100);
+            ObjectMapper mapper = new ObjectMapper();
+            String availableCredit = mapper.writeValueAsString(machine.getAvailableCredit());
+            res.body("credit: " + availableCredit);
+            res.status(200);
+
+            return availableCredit;
+
+        } );
+
+
+
+
+        post("/vend", (req, res) -> {
+            ObjectMapper mapper = new ObjectMapper();
+            String availableCredit = mapper.writeValueAsString(machine.getAvailableCredit());
+            res.status(200);
+            return availableCredit;
+
+        } );
+
+
+
+
 
 
         options("/*", (request,response)->{

@@ -47,6 +47,16 @@ public class CoinContainer {
         }
     }
 
+
+    public void add(int coinValue) {
+        for (Coin coin:getAcceptedCoins()
+             ) {
+            if (coin.getValue() == coinValue) {
+                add(coin);
+            }
+        }
+    }
+
     public Integer getCount(Coin coin) {
         Integer count = 0;
         if (this.coins.containsKey(coin)) {

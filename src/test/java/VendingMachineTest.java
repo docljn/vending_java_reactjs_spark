@@ -29,6 +29,8 @@ public class VendingMachineTest {
         assertEquals(4, machine.acceptedCoins().length);
     }
 
+
+
     @Test
     public void machineStocksStatedItems(){
         assertEquals(3, machine.stockedItems().length);
@@ -53,6 +55,12 @@ public class VendingMachineTest {
     @Test
     public void addingCoinsFillsCoinSlot(){
         machine.add(Coin.DOLLAR);
+        assertEquals((Integer)100, machine.getAvailableCredit());
+    }
+
+    @Test
+    public void addingCoinsByValueFillsCoinSlot(){
+        machine.add(100);
         assertEquals((Integer)100, machine.getAvailableCredit());
     }
 

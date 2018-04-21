@@ -66,6 +66,11 @@ public class VendingMachine {
         this.coinSlot.add(coin);
     }
 
+
+    public void add(int coinValue) {
+        this.coinSlot.add(coinValue);
+    }
+
     public void coinReturn() {
 //        I'm not modelling the purchaser, so the coins effectively vanish here
         this.coinSlot.transferAllCoins(new CoinContainer());

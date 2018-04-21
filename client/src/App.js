@@ -19,7 +19,7 @@ class App extends Component {
   loadCoins(url) {
     const request = new XMLHttpRequest();
     request.open("GET", url);
-    request.addEventListener("load", (item) => {
+    request.addEventListener("load", () => {
       if (request.status === 200) {
         const jsonString = request.responseText;
         const itemArray = JSON.parse(jsonString);
@@ -32,7 +32,7 @@ class App extends Component {
   loadItems(url) {
     const request = new XMLHttpRequest();
     request.open("GET", url);
-    request.addEventListener("load", (item) => {
+    request.addEventListener("load", () => {
       if (request.status === 200) {
         const jsonString = request.responseText;
         const itemArray = JSON.parse(jsonString);
@@ -43,6 +43,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    // TODO: I would like to combine this into a single api call, means a new backend method to get config = {coins:[], items:[]}
     this.loadCoins("http://localhost:4567/coins");
     this.loadItems("http://localhost:4567/items");
   }
