@@ -76,17 +76,7 @@ public class SparkController {
         post("/item/:itemSelector", (req, res) -> {
             String itemSelector = req.params("itemSelector");
 
-
-
-            if (itemSelector.equals("A")){
-                machine.select("A");
-            }
-            if (itemSelector.equals("B")){
-                machine.select("B");
-            }
-            if (itemSelector.equals("C")){
-                machine.select("C");
-            }
+            machine.select(itemSelector);
 
             ObjectMapper mapper = new ObjectMapper();
             String priceString = mapper.writeValueAsString(machine.getSelectedItem().getPrice());

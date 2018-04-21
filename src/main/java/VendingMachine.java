@@ -7,6 +7,7 @@ public class VendingMachine {
     private DisplayCabinet displayCabinet;
     private StockItem selectedItem;
     private String message;
+    private String itemsToCollect;
 
     public VendingMachine() {
         this.coinSlot = new CoinContainer();
@@ -15,6 +16,7 @@ public class VendingMachine {
         this.displayCabinet = new DisplayCabinet();
         this.selectedItem = null;
         this.message = "";
+        this.itemsToCollect = "";
         //        TODO: may need to rethink this, or guard against null pointer exceptions
 
     }
@@ -79,7 +81,7 @@ public class VendingMachine {
 //        TODO: Consider how to handle out of stock situation: currently setting message
         if (this.displayCabinet.inStock(selectedItem)) {
             this.selectedItem = selectedItem;
-            this.message = (BigDecimal.valueOf(selectedItem.getPrice())).divide(BigDecimal.valueOf(100)).toString();
+            this.message = "Please insert coins.";
         } else {
             this.message = "Out of Stock";
         }
@@ -88,13 +90,13 @@ public class VendingMachine {
 
     public void select(String itemSelector) {
         for (StockItem item: stockedItems()) {
-            if (item.getSelector() == itemSelector){
+            if (item.getSelector().equals(itemSelector)){
                 select(item);
             }
         }
     }
 
-//             this.message = (BigDecimal.valueOf(price)).divide(BigDecimal.valueOf(100)).toString();
+//      TODO: FOR CURRENCY FORMATTING:       this.message = (BigDecimal.valueOf(price)).divide(BigDecimal.valueOf(100)).toString();
 
     public StockItem getSelectedItem() {
         return this.selectedItem;
@@ -113,8 +115,12 @@ public class VendingMachine {
                 this.selectedItem = null;
                 this.changeHopper.remove(coinChange); // returns false if insufficient change
                 this.message = "";
+                this.itemsToCollect = "Please collect " + itemToVend.getSelector() + ".";
+                if (changeDueAmount > 0){
+                    this.itemsToCollect += " Please collect change of " + changeDueAmount + ".";
+                }
             } else {
-                this.message = "Please insert coins";
+                this.message = "Please insert coins.";
             }
         }
         return itemToVend;
@@ -126,4 +132,16 @@ public class VendingMachine {
     }
 
 
+    public String getItemsToCollect() {
+        return this.itemsToCollect;
+    }
+
+    public HashMap<String,String> getStatus() {
+        HashMap<String, String> status = new HashMap<>();
+        status.put("availableCredit", getAvailableCredit().toString());
+        status.put("selectedItem", getSelectedItem().getSelector());
+        status.put("message", getMessage());
+        status.put("itemsToCollect", getItemsToCollect());
+        return status;
+    }
 }

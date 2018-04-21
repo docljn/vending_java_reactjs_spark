@@ -2,6 +2,8 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.util.HashMap;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
@@ -111,13 +113,6 @@ public class VendingMachineTest {
 
 
     @Test
-    public void selectSetsMessageAsPriceIfInStock(){
-        machine.select(StockItem.A);
-        assertEquals("0.65", machine.getMessage());
-    }
-
-
-    @Test
     public void coinReturnResetsSelectedToNull(){
         machine.add(Coin.DOLLAR);
         machine.select(StockItem.A);
@@ -178,6 +173,19 @@ public class VendingMachineTest {
         // short changing is a feature of real life machines too
     }
 
+    @Test
+    public void vendAddsChangeAmountToItemsToCollect(){
+        machineWithoutStock.testService();
+        machineWithoutStock.add(Coin.DOLLAR);
+        machineWithoutStock.add(Coin.NICKEL);
+        machineWithoutStock.add(Coin.NICKEL);
+        machineWithoutStock.add(Coin.DIME);
+        machineWithoutStock.select(StockItem.B);
+        machineWithoutStock.vend();
+        assertEquals("Please collect B. Please collect change of 20.", machineWithoutStock.getItemsToCollect());
+        // short changing is a feature of real life machines too
+    }
+
 
     @Test
     public void vendLeavesCoinInSlotIfSelectedItemIsNull(){
@@ -211,7 +219,7 @@ public class VendingMachineTest {
         machine.add(Coin.DOLLAR);
         machine.select(StockItem.C);
         machine.vend();
-        assertEquals("Please insert coins", machine.getMessage());
+        assertEquals("Please insert coins.", machine.getMessage());
     }
 
 
@@ -224,10 +232,43 @@ public class VendingMachineTest {
     }
 
     @Test
-    public void vendReturnsSelectedItem(){
+    public void vendAddsSelectedItemToItemsToCollect(){
         machine.select(StockItem.B);
         machine.add(Coin.DOLLAR);
-        assertEquals(StockItem.B, machine.vend());
+        machine.vend();
+        assertEquals("Please collect B.", machine.getItemsToCollect());
+    }
+
+    @Test
+    public void getMessageReturnsMessage(){
+        machine.select("A");
+        assertEquals("Please insert coins.", machine.getMessage());
+    }
+
+    @Test
+    public void getItemsToCollectReturnsString(){
+        machine.add(Coin.DOLLAR);
+        machine.select(StockItem.B);
+        machine.vend();
+        assertEquals("Please collect B.", machine.getItemsToCollect());
+    }
+
+    @Ignore
+    @Test
+    public void machineGetStatusReturnsSummaryHashForAPI(){
+        machine.add(100);
+        machine.select("B");
+        HashMap<String, String> expected = new HashMap<>();
+        expected.put("availableCredit", "100");
+        expected.put("selectedItem", "B");
+        expected.put("message", "");
+        expected.put("itemsToCollect", "");
+        assertEquals(expected, machine.getStatus());
+
+//        availableCredit: machine.getAvailableCredit().toString();
+//        selectedItem: machine.getSelectedItem().toString();
+//        message: machine.getMessage();
+//        itemsToCollect: machine.getItemsToCollect;
     }
 
 
