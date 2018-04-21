@@ -30,8 +30,8 @@ public class SparkController {
             String coins = mapper.writeValueAsString(machine.acceptedCoins());
             res.status(200);
             return coins;
-
         } );
+
 
 
         post("/coins/return", (req, res) -> {
@@ -42,12 +42,12 @@ public class SparkController {
             System.out.println("CREDIT" + credit);
             res.body("credit: " + credit);
             return credit;
-
+//TODO: eventually, return machine status in full to include messages etc
         } );
 
 
         post("/coin/:value", (req, res) -> {
-            String coinValue = req.params(":value");
+            String coinValue = req.params("value");
 
             Integer value = Integer.valueOf(coinValue);
             machine.add(value);
@@ -74,29 +74,27 @@ public class SparkController {
 
 
         post("/item/:itemSelector", (req, res) -> {
-//            TODO: why doesn't it work with Integer price = machine.select(selector);
-            String selector = req.params(":itemSelector");
-            Integer price = 0;
-            if (selector.equals("A")){
-                price = machine.select("A");
-            }
-            if (selector.equals("B")){
-                price = machine.select("B");
+            String itemSelector = req.params("itemSelector");
 
-            }
-            if (selector.equals("C")){
-                price = machine.select("C");
 
+
+            if (itemSelector.equals("A")){
+                machine.select("A");
+            }
+            if (itemSelector.equals("B")){
+                machine.select("B");
+            }
+            if (itemSelector.equals("C")){
+                machine.select("C");
             }
 
             ObjectMapper mapper = new ObjectMapper();
-            String priceString = mapper.writeValueAsString(price);
+            String priceString = mapper.writeValueAsString(machine.getSelectedItem().getPrice());
             System.out.println("PRICE "+priceString);
 
             System.out.println("selected"+machine.getSelectedItem());
-            res.body("selectedItem: " + machine.getSelectedItem());
+//            res.body("selectedItem: " + machine.getSelectedItem());
             res.status(200);
-
             return priceString;
 
         } );

@@ -1,5 +1,4 @@
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.HashMap;
 
 public class VendingMachine {
@@ -48,8 +47,6 @@ public class VendingMachine {
         return this.changeHopper.getCashCount();
     }
 
-
-
     public StockItem[] stockedItems() {
         return this.displayCabinet.getStockItemTypes();
     }
@@ -78,34 +75,26 @@ public class VendingMachine {
     }
 
 
-    public Integer select(StockItem selectedItem) {
-//        TODO: Consider how to handle out of stock situation: currently returning zero price
-        this.selectedItem = null;
-        Integer price = 0;
+    public void select(StockItem selectedItem) {
+//        TODO: Consider how to handle out of stock situation: currently setting message
         if (this.displayCabinet.inStock(selectedItem)) {
             this.selectedItem = selectedItem;
-            price = this.selectedItem.getPrice();
-            this.message = (BigDecimal.valueOf(price)).divide(BigDecimal.valueOf(100)).toString();
+            this.message = (BigDecimal.valueOf(selectedItem.getPrice())).divide(BigDecimal.valueOf(100)).toString();
         } else {
             this.message = "Out of Stock";
         }
-        return price;
     }
 
 
-    public Integer select(String itemSelector) {
-        Integer price = 0;
+    public void select(String itemSelector) {
         for (StockItem item: stockedItems()) {
             if (item.getSelector() == itemSelector){
-                price = select(item);
+                select(item);
             }
         }
-        return price;
-
-//        TODO: may need to rethink this, or guard against null pointer exceptions
     }
 
-
+//             this.message = (BigDecimal.valueOf(price)).divide(BigDecimal.valueOf(100)).toString();
 
     public StockItem getSelectedItem() {
         return this.selectedItem;

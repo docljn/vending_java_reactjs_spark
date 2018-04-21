@@ -104,23 +104,6 @@ public class VendingMachineTest {
 
 
     @Test
-    public void selectReturnsItemPrice(){
-        assertEquals((Integer)65, machine.select(StockItem.A));
-    }
-
-    @Test
-    public void selectWithStringSelectorReturnsPrice(){
-        assertEquals((Integer)100, machine.select("B"));
-    }
-
-
-    @Test
-    public void selectReturnsPriceZeroIfItemNotInStock(){
-        assertEquals((Integer)0, machineWithoutStock.select(StockItem.A));
-    }
-
-
-    @Test
     public void selectDisplaysOutOfStockMessage(){
         machineWithoutStock.select(StockItem.B);
         assertEquals("Out of Stock", machineWithoutStock.getMessage());
@@ -128,7 +111,7 @@ public class VendingMachineTest {
 
 
     @Test
-    public void selectDisplaysPriceIfInStock(){
+    public void selectSetsMessageAsPriceIfInStock(){
         machine.select(StockItem.A);
         assertEquals("0.65", machine.getMessage());
     }
