@@ -29,7 +29,6 @@ public class VendingMachineTest {
 
     @Test
     public void machineAcceptsStatedCoins(){
-        System.out.println(machine.acceptedCoins());
         assertEquals(4, machine.acceptedCoins().length);
     }
 
@@ -309,6 +308,12 @@ public class VendingMachineTest {
 
         System.out.println(machine.getStatus());
         assertEquals(expected, machine.getStatus());
+    }
+
+    @Test
+//    TODO:
+    public void machineGetConfigReturnsCoinsAndItems(){
+//        Map<>() config = new HashMap<>();
     }
 
 

@@ -21,6 +21,9 @@ public class SparkController {
         get("/items", (req, res) -> {
             ObjectMapper mapper = new ObjectMapper();
             String items = mapper.writeValueAsString(machine.stockedItems());
+            System.out.println(items);
+            String gsonItems = gson.toJson(machine.stockedItems());
+            System.out.println("GSON"+gsonItems);
             res.status(200);
             return items;
 
