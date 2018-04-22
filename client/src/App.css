@@ -13,6 +13,7 @@ img {
 }
 
 .App {
+  min-width: 624px;
   border: 2px solid black;
   text-align: center;
   background: #f5f5f5;
