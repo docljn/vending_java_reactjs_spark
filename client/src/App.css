@@ -9,7 +9,7 @@ input {
 }
 
 img {
-  width: 6em;
+  height: 6em;
 }
 
 .App {
@@ -17,8 +17,8 @@ img {
   text-align: center;
   background: #f5f5f5;
   color: #333;
-  margin: 20px;
-  padding: 20px;
+  margin: 12px;
+  padding: 12px;
 }
 
 
@@ -55,7 +55,6 @@ img {
 .vending-machine {
   width: 600px;
   height: auto;
-  border: 1px solid black;
   margin:auto;
 }
 

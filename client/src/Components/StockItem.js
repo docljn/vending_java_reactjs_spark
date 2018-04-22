@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ItemImage from "../images/ItemImage.js";
 
 class StockItem extends Component {
 
@@ -10,7 +11,8 @@ class StockItem extends Component {
   render() {
     return (
       <div className="stock-item">
-        <img src="placeholder" alt={"pic of stock item " + this.props.id}/>
+        <img src={ItemImage[this.props.id]} alt={"pic of stock item " + this.props.id}/>
+        <br/>
         <input type="submit" value={"Select "+this.props.id} onClick={this.props.onClick} id={this.props.id}/>
       </div>
     );

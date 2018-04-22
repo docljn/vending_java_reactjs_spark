@@ -23,12 +23,16 @@ public class VendingMachine {
     public void service() {
         this.changeHopper.resetFloat(100);
         this.displayCabinet.restock(10);
+        this.message = "Please select an item.";
+        this.itemsToCollect = "";
         coinReturn();
     }
 
     public void testService() {
         this.changeHopper.resetFloat(1);
         this.displayCabinet.restock(1);
+        this.message = "Please select an item.";
+        this.itemsToCollect = "";
         coinReturn();
     }
 

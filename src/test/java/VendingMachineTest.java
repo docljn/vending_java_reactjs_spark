@@ -54,6 +54,18 @@ public class VendingMachineTest {
         assertEquals((Integer)0, machine.getAvailableCredit());
     }
 
+    @Test
+    public void serviceResetsItemsToCollect(){
+        machineWithoutStock.testService();
+        machineWithoutStock.add(Coin.DOLLAR);
+        machineWithoutStock.add(Coin.DOLLAR);
+
+        machineWithoutStock.select(StockItem.B);
+        machineWithoutStock.vend();
+        machineWithoutStock.service();
+        assertEquals("", machineWithoutStock.getItemsToCollect());
+    }
+
 
     @Test
     public void addingCoinsFillsCoinSlot(){
@@ -293,7 +305,6 @@ public class VendingMachineTest {
         expected.put("message", "Price is $1.00.");
         expected.put("itemsToCollect", "");
 
-        System.out.println(machine.getStatus());
         assertEquals(expected, machine.getStatus());
     }
 
@@ -306,7 +317,6 @@ public class VendingMachineTest {
         expected.put("message", "Please select an item.");
         expected.put("itemsToCollect", "");
 
-        System.out.println(machine.getStatus());
         assertEquals(expected, machine.getStatus());
     }
 
