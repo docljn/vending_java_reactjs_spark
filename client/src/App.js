@@ -23,7 +23,6 @@ class App extends Component {
       if (request.status === 200) {
         const jsonString = request.responseText;
         const coinArray = JSON.parse(jsonString);
-        console.log(coinArray);
         this.setState({coins: coinArray});
       }
     });
