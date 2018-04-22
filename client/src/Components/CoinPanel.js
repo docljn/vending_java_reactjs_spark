@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Coin from "./Coin.js";
+import Images from "../images/Images";
 
 class CoinPanel extends Component {
 

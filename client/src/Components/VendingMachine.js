@@ -10,7 +10,7 @@ class VendingMachine extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: "Please make a selection",
+      message: "Please select an item.",
       availableCredit: "$0.00",
       coins: this.props.coins,
       items: this.props.items
@@ -27,27 +27,27 @@ class VendingMachine extends Component {
 
   render() {
     return (
-      <div className="vending-machine">
+      <div className="vending-machine flex-vertical">
         <h1>Vending Machine</h1>
         <div className="user-action flex">
           <div className="item-action flex-vertical">
-            <TextDisplay message={this.state.message}/>
+            <TextDisplay className="message" message={this.state.message}/>
             <DisplayCabinet items={this.props.items} itemClick={this.handleItemClick}/>
             <ActionButton name="vend" onClick = {this.handleVendClick} />
           </div>
 
           <div className="coin-action flex-vertical">
-            <TextDisplay message={"Available credit "+this.state.availableCredit}/>
+            <TextDisplay className="message" message={"Available credit "+this.state.availableCredit}/>
             <CoinPanel coins={this.props.coins} coinClick={this.handleCoinClick}/>
             <ActionButton name="coin return" onClick={this.handleCoinReturnClick}/>
           </div>
         </div>
+        <div className="out">
+          <TextDisplay className="message" message={this.state.itemsToCollect}/>
+        </div>
         <div className="service-action">
           <ActionButton name="service" onClick = {this.handleServiceClick}/>
-        </div>
-        <div className="out">
-          <TextDisplay message={this.state.itemsToCollect}/>
-        </div>
+        </div> 
       </div>
     );
   }

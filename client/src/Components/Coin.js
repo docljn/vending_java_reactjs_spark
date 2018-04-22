@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import CoinImage from "../images/CoinImage";
 
 class Coin extends Component {
 
@@ -10,7 +11,8 @@ class Coin extends Component {
   render() {
     return (
       <div className="coin">
-        <img src="placeholder" alt={"pic of "+this.props.type}/>
+        <img src={CoinImage[this.props.type]} alt={"pic of "+this.props.type}/>
+        <br/>
         <input type="submit" id={this.props.type} value={"Add "+this.props.type} onClick={this.props.coinClick}/>
       </div>
     );

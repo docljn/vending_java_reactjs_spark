@@ -10,7 +10,7 @@ class TextDisplay extends Component {
   render() {
     return (
       <div className="TextDisplay">
-        <p>{this.props.message}</p>
+        <h3>{this.props.message}</h3>
       </div>
     );
   }

@@ -1,6 +1,15 @@
 * {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  padding: 4px;
+}
+
+input {
+  width: 9em;
+}
+
+img {
+  width: 6em;
 }
 
 .App {
@@ -12,34 +21,42 @@
   padding: 20px;
 }
 
+
 .coin {
-  border: 1px dotted blue;
 }
 
 .coin-panel {
-  border: 2px solid blue;
+  border: 2px solid black;
+  border-radius: 4px;
 }
 
 .coin-action {
-  border: 1px dashed blue;
 }
 
 .display-cabinet {
-  border: 2px solid red;
+  border: 2px solid black;
+  border-radius: 4px;
 }
 
 .item-action {
-  border: 1px dashed red;
+}
+
+.message {
 }
 
 .stock-item {
-  border: 1px dotted red;
+}
+
+.user-action {
+  border: 2px solid black;
+  border-radius: 4px;
 }
 
 .vending-machine {
   width: 600px;
-  height: 500px;
+  height: auto;
   border: 1px solid black;
+  margin:auto;
 }
 
 /* Layout */
@@ -47,6 +64,8 @@
 .flex {
   display: flex;
   align-items: stretch;
+  justify-content: space-evenly;
+
 }
 
 .flex-vertical {
