@@ -1,26 +1,23 @@
 import React, { Component } from "react";
 import StockItem from "./StockItem.js";
 
-class DisplayCabinet extends Component {
-
-  constructor(props) {
-    super(props);
-  }
-
-  render(){
-    const html = this.props.items.map(item => {
-      return (
-        <StockItem id={item.selector} key={this.props.items.indexOf(item)} onClick={this.props.itemClick}/>
-      );
-    });
+const DisplayCabinet = (props) =>  {
 
 
+
+
+  const html = props.items.map(item => {
     return (
-      <div className="display-cabinet">
-        {html}
-      </div>
+      <StockItem id={item.selector} key={props.items.indexOf(item)} onClick={props.itemClick}/>
     );
-  }
-}
+  });
+
+
+  return (
+    <div className="display-cabinet">
+      {html}
+    </div>
+  );
+};
 
 export default DisplayCabinet;
