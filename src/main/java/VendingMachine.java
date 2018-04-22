@@ -127,7 +127,7 @@ public class VendingMachine {
                     this.itemsToCollect += " Please collect change of " + CurrencyDisplay.formatDollars(changeDueAmount) + ".";
                 }
             } else {
-                this.message = "Please insert coins.";
+                this.message += " Please insert coins.";
             }
         }
         return itemToVend;

@@ -249,7 +249,7 @@ public class VendingMachineTest {
         machine.add(Coin.DOLLAR);
         machine.select(StockItem.C);
         machine.vend();
-        assertEquals("Please insert coins.", machine.getMessage());
+        assertEquals("Price is $1.50. Please insert coins.", machine.getMessage());
     }
 
 

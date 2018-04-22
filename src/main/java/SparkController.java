@@ -21,9 +21,6 @@ public class SparkController {
         get("/items", (req, res) -> {
             ObjectMapper mapper = new ObjectMapper();
             String items = mapper.writeValueAsString(machine.stockedItems());
-            System.out.println(items);
-            String gsonItems = gson.toJson(machine.stockedItems());
-            System.out.println("GSON"+gsonItems);
             res.status(200);
             return items;
 
@@ -42,7 +39,6 @@ public class SparkController {
             machine.coinReturn();
             String machineStatus = gson.toJson(machine.getStatus());
             res.status(200);
-            System.out.println("STATUS" + machineStatus);
             return machineStatus;
         } );
 
@@ -84,7 +80,7 @@ public class SparkController {
 
 
 
-
+// Fix CORS issues by opening everything up: not for production!
 
         options("/*", (request,response)->{
 
@@ -115,4 +111,3 @@ public class SparkController {
 //ObjectMapper.readValue() is used to deserialize JSON string to Java Object.
 
 
-//    CORS header 'Access-Control-Allow-Origin'
