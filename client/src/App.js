@@ -22,8 +22,9 @@ class App extends Component {
     request.addEventListener("load", () => {
       if (request.status === 200) {
         const jsonString = request.responseText;
-        const itemArray = JSON.parse(jsonString);
-        this.setState({coins: itemArray});
+        const coinArray = JSON.parse(jsonString);
+        console.log(coinArray);
+        this.setState({coins: coinArray});
       }
     });
     request.send();

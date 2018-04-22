@@ -11,7 +11,7 @@ class VendingMachine extends Component {
     super(props);
     this.state = {
       message: "Please make a selection",
-      availableCredit: "0.00",
+      availableCredit: "$0.00",
       coins: this.props.coins,
       items: this.props.items
     };
@@ -51,7 +51,7 @@ class VendingMachine extends Component {
       </div>
     );
   }
-  
+
   // consider refactoring to use a single onClick method?
   handleClick(event, url) {
     event.preventDefault();
@@ -87,6 +87,7 @@ class VendingMachine extends Component {
     event.preventDefault();
     this.postRequestOnClick("http://localhost:4567/service");
   }
+
 
 
   postRequestOnClick(url){

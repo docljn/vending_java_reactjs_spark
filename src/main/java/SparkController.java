@@ -21,7 +21,6 @@ public class SparkController {
         get("/items", (req, res) -> {
             ObjectMapper mapper = new ObjectMapper();
             String items = mapper.writeValueAsString(machine.stockedItems());
-            System.out.println(machine.stockedItems());
             res.status(200);
             return items;
 

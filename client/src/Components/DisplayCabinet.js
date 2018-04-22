@@ -5,13 +5,12 @@ class DisplayCabinet extends Component {
 
   constructor(props) {
     super(props);
-    console.log("DisplayCabinetProps " + JSON.stringify(props));
   }
 
   render(){
     const html = this.props.items.map(item => {
       return (
-        <StockItem selector={item.selector} price={item.price} key={this.props.items.indexOf(item)} onClick={this.props.itemClick}/>
+        <StockItem id={item.selector} price={item.price} key={this.props.items.indexOf(item)} onClick={this.props.itemClick}/>
       );
     });
 
