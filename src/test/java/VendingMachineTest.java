@@ -310,11 +310,6 @@ public class VendingMachineTest {
         assertEquals(expected, machine.getStatus());
     }
 
-    @Test
-//    TODO:
-    public void machineGetConfigReturnsCoinsAndItems(){
-//        Map<>() config = new HashMap<>();
-    }
 
 
     @Ignore("Need to clarify if warning on minimum coin count, or something else")
