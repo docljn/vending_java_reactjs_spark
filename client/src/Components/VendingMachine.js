@@ -51,7 +51,8 @@ class VendingMachine extends Component {
       </div>
     );
   }
-
+  
+  // consider refactoring to use a single onClick method?
   handleClick(event, url) {
     event.preventDefault();
     this.postRequestOnClick(url);

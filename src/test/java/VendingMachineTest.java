@@ -69,6 +69,8 @@ public class VendingMachineTest {
     }
 
 
+
+
     @Test
     public void coinReturnEmptiesCoinSlot(){
         machine.add(Coin.DOLLAR);
@@ -128,6 +130,25 @@ public class VendingMachineTest {
         machine.select(StockItem.A);
         machine.coinReturn();
         assertEquals("Please select an item.", machine.getMessage());
+    }
+
+
+    @Test
+    public void addingCoinsClearsItemsToCollect(){
+        machine.add(Coin.DOLLAR);
+        machine.select(StockItem.A);
+        machine.vend();
+        machine.add(Coin.DOLLAR);
+        assertEquals("", machine.getItemsToCollect());
+    }
+
+    @Test
+    public void selectingItemClearsItemsToCollect(){
+        machine.add(Coin.DOLLAR);
+        machine.select(StockItem.A);
+        machine.vend();
+        machine.select("B");
+        assertEquals("", machine.getItemsToCollect());
     }
 
 
@@ -192,7 +213,7 @@ public class VendingMachineTest {
         machineWithoutStock.add(Coin.DIME);
         machineWithoutStock.select(StockItem.B);
         machineWithoutStock.vend();
-        assertEquals("Please collect B. Please collect change of 20.", machineWithoutStock.getItemsToCollect());
+        assertEquals("Please collect B. Please collect change of $0.20.", machineWithoutStock.getItemsToCollect());
         // short changing is a feature of real life machines too
     }
 
@@ -238,7 +259,7 @@ public class VendingMachineTest {
         machine.select(StockItem.B);
         machine.add(Coin.DOLLAR);
         machine.vend();
-        assertEquals("", machine.getMessage());
+        assertEquals("Please select an item.", machine.getMessage());
     }
 
     @Test
@@ -252,7 +273,7 @@ public class VendingMachineTest {
     @Test
     public void getMessageReturnsMessage(){
         machine.select("A");
-        assertEquals("Price is 65.", machine.getMessage());
+        assertEquals("Price is $0.65.", machine.getMessage());
     }
 
     @Test
@@ -268,9 +289,9 @@ public class VendingMachineTest {
         machine.add(100);
         machine.select("B");
         Map<String, String> expected = new HashMap<>();
-        expected.put("availableCredit", "100");
+        expected.put("availableCredit", "$1.00");
         expected.put("selectedItem", "B");
-        expected.put("message", "Price is 100.");
+        expected.put("message", "Price is $1.00.");
         expected.put("itemsToCollect", "");
 
         System.out.println(machine.getStatus());
@@ -281,7 +302,7 @@ public class VendingMachineTest {
     public void machineGetStatusReturnsSummaryHashForAPIIfNullValuesPresent(){
         machine.add(100);
         Map<String, String> expected = new HashMap<>();
-        expected.put("availableCredit", "100");
+        expected.put("availableCredit", "$1.00");
         expected.put("selectedItem", "");
         expected.put("message", "Please select an item.");
         expected.put("itemsToCollect", "");
@@ -297,11 +318,6 @@ public class VendingMachineTest {
 
     }
 
-    @Ignore("How to model coins being returned from the machine on coin return or change?")
-    @Test
-    public void machineCanReturnCoinsToUser(){
-        // machine returns selected item, so how can I "return" change/coins too?
-    }
 
     @Ignore("Spec suggests dollars are not returned from the machine")
     @Test

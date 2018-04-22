@@ -54,6 +54,15 @@ public class SparkController {
         } );
 
 
+        post("/item/:itemSelector", (req, res) -> {
+            String itemSelector = req.params("itemSelector");
+
+            machine.select(itemSelector);
+            String machineStatus = gson.toJson(machine.getStatus());
+            res.status(200);
+            return machineStatus;
+
+        } );
 
 
         post("/vend", (req, res) -> {
@@ -71,15 +80,6 @@ public class SparkController {
         } );
 
 
-        post("/item/:itemSelector", (req, res) -> {
-            String itemSelector = req.params("itemSelector");
-
-            machine.select(itemSelector);
-            String machineStatus = gson.toJson(machine.getStatus());
-            res.status(200);
-            return machineStatus;
-
-        } );
 
 
 
