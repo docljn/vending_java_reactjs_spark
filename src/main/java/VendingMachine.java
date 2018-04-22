@@ -1,4 +1,3 @@
-import java.math.BigDecimal;
 import java.util.HashMap;
 
 public class VendingMachine {
@@ -67,8 +66,8 @@ public class VendingMachine {
     }
 
 
-    public void add(int coinValue) {
-        this.coinSlot.add(coinValue);
+    public void add(String coinType) {
+        this.coinSlot.add(coinType);
         this.itemsToCollect = "";
     }
 

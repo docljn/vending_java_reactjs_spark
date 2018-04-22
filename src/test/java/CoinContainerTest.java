@@ -35,8 +35,8 @@ public class CoinContainerTest {
     }
 
     @Test
-    public void canAddAcceptedCoinMatchingValue(){
-        hopper.add(100);
+    public void canAddAcceptedCoinMatchingType(){
+        hopper.add("dollar");
         HashMap<Coin, Integer> expected = new HashMap<>();
         expected.put(Coin.DOLLAR, 1);
         assertEquals(expected, hopper.getCoinContents());

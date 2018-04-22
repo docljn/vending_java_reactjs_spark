@@ -73,8 +73,8 @@ class VendingMachine extends Component {
 
   handleCoinClick(event){
     event.preventDefault();
-    let coinvalue = event.target.value;
-    this.postRequestOnClick("http://localhost:4567/coin/"+coinvalue);
+    let coinType = event.target.id;
+    this.postRequestOnClick("http://localhost:4567/coin/"+coinType);
   }
 
   handleItemClick(event){

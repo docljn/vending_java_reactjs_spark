@@ -62,8 +62,8 @@ public class VendingMachineTest {
     }
 
     @Test
-    public void addingCoinsByValueFillsCoinSlot(){
-        machine.add(100);
+    public void addingCoinsByTypeFillsCoinSlot(){
+        machine.add("dollar");
         assertEquals((Integer)100, machine.getAvailableCredit());
     }
 
@@ -285,7 +285,7 @@ public class VendingMachineTest {
 
     @Test
     public void machineGetStatusReturnsSummaryHashForAPI(){
-        machine.add(100);
+        machine.add("dollar");
         machine.select("B");
         Map<String, String> expected = new HashMap<>();
         expected.put("availableCredit", "$1.00");
@@ -299,7 +299,7 @@ public class VendingMachineTest {
 
     @Test
     public void machineGetStatusReturnsSummaryHashForAPIIfNullValuesPresent(){
-        machine.add(100);
+        machine.add("dollar");
         Map<String, String> expected = new HashMap<>();
         expected.put("availableCredit", "$1.00");
         expected.put("selectedItem", "");

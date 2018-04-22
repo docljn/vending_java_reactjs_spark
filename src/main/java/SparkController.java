@@ -47,12 +47,11 @@ public class SparkController {
         } );
 
 
-        post("/coin/:value", (req, res) -> {
-            Integer value = Integer.valueOf(req.params("value"));
-            machine.add(value);
+        post("/coin/:coinType", (req, res) -> {
+            String coinType = req.params("coinType");
+            machine.add(coinType);
             String machineStatus = gson.toJson(machine.getStatus());
             return machineStatus;
-
         } );
 
 

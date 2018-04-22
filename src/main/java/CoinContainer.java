@@ -48,10 +48,10 @@ public class CoinContainer {
     }
 
 
-    public void add(int coinValue) {
+    public void add(String coinType) {
         for (Coin coin:getAcceptedCoins()
              ) {
-            if (coin.getValue() == coinValue) {
+            if (coin.getType().equals(coinType)) {
                 add(coin);
             }
         }
