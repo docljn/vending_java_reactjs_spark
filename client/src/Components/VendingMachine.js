@@ -15,13 +15,14 @@ class VendingMachine extends Component {
       coins: this.props.coins,
       items: this.props.items
     };
+    this.postRequestOnClick = this.postRequestOnClick.bind(this);
     this.handleCoinClick = this.handleCoinClick.bind(this);
     this.handleItemClick = this.handleItemClick.bind(this);
     this.handleServiceClick = this.handleServiceClick.bind(this);
     this.handleCoinReturnClick = this.handleCoinReturnClick.bind(this);
     this.handleVendClick = this.handleVendClick.bind(this);
-    this.postOnCoinClick = this.postOnCoinClick.bind(this);
-    this.postOnVendClick = this.postOnVendClick.bind(this);
+    // this.postOnCoinClick = this.postOnCoinClick.bind(this);
+    // this.postOnVendClick = this.postOnVendClick.bind(this);
     // get all details of vending machine and set state here.....
   }
 
@@ -49,8 +50,6 @@ class VendingMachine extends Component {
           <TextDisplay message={this.state.itemsToCollect}/>
         </div>
       </div>
-
-
     );
   }
 
@@ -59,81 +58,35 @@ class VendingMachine extends Component {
 
   handleVendClick(event) {
     event.preventDefault();
-    console.log(event.target);
-    this.postOnVendClick();
-    // put request to /vend/:selectedItem
+    this.postRequestOnClick("http://localhost:4567/vend");
   }
 
 
   handleCoinReturnClick(event) {
     event.preventDefault();
-    console.log(event.target);
-    this.postOnCoinReturnClick()
+    this.postRequestOnClick("http://localhost:4567/coins/return");
   }
 
 
   handleCoinClick(event){
     event.preventDefault();
     let coinvalue = event.target.value;
-    this.postOnCoinClick("http://localhost:4567/coin/"+coinvalue);
-    console.log(event.target);
+    this.postRequestOnClick("http://localhost:4567/coin/"+coinvalue);
   }
 
   handleItemClick(event){
     event.preventDefault();
     let itemSelector = event.target.id;
-    console.log("itemSelector"+itemSelector);
-    this.postOnItemClick("http://localhost:4567/item/"+itemSelector);
-    console.log(event.target);
-
-    // put request to /select/:clickedItem
+    this.postRequestOnClick("http://localhost:4567/item/"+itemSelector);
   }
 
   handleServiceClick(event) {
-    // put request to /service
     event.preventDefault();
-    console.log(event.target);
+    this.postRequestOnClick("http://localhost:4567/service");
   }
 
 
-
-
-
-  postOnCoinClick(url) {
-    const request = new XMLHttpRequest();
-    request.open("POST", url);
-    request.addEventListener("load", () => {
-      if (request.status === 200) {
-        const jsonString = request.responseText;
-        const credit = JSON.parse(jsonString);
-        this.setState({availableCredit: credit});
-      }
-      console.log("Coin STATUS" + request.status);
-
-    });
-    request.send();
-  }
-
-
-  postOnCoinReturnClick() {
-    const url = "http://localhost:4567/coins/return";
-    const request = new XMLHttpRequest();
-    request.open("POST", url);
-    request.addEventListener("load", () => {
-      if (request.status === 200) {
-        const jsonString = request.responseText;
-        const machineStatus = JSON.parse(jsonString);
-        console.log(machineStatus);
-        this.setState(machineStatus);
-      }
-      console.log("return request status"+request.status);
-
-    });
-    request.send();
-  }
-
-  postOnVendClick() {
-    const url = "http://localhost:4567/vend";
+  postRequestOnClick(url){
     const request = new XMLHttpRequest();
     request.open("POST", url);
     request.addEventListener("load", () => {
@@ -142,26 +95,10 @@ class VendingMachine extends Component {
         const machineStatus = JSON.parse(jsonString);
         this.setState(machineStatus);
       }
-      console.log("request status"+request.status);
-
     });
     request.send();
   }
 
-  postOnItemClick(url) {
-    const request = new XMLHttpRequest();
-    request.open("POST", url);
-    request.addEventListener("load", () => {
-      if (request.status === 200) {
-        const jsonString = request.responseText;
-        const machineState = JSON.parse(jsonString);
-        this.setState(machineState);
-      }
-      console.log("ITEM STATUS" + request.status);
-
-    });
-    request.send();
-  }
 
 }
 

@@ -1,6 +1,7 @@
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 // Coins must be declared in ascending order for this to work: largest coin is last in list....
+// Jackson library used for json here as Gson does not offer easy enum serialization
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 
 public enum Coin {

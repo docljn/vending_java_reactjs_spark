@@ -38,26 +38,18 @@ public class SparkController {
 
         post("/coins/return", (req, res) -> {
             machine.coinReturn();
-
             String machineStatus = gson.toJson(machine.getStatus());
             res.status(200);
             System.out.println("STATUS" + machineStatus);
             return machineStatus;
-//TODO: eventually, return machine status in full to include messages etc
         } );
 
 
         post("/coin/:value", (req, res) -> {
-            String coinValue = req.params("value");
-
-            Integer value = Integer.valueOf(coinValue);
+            Integer value = Integer.valueOf(req.params("value"));
             machine.add(value);
-            ObjectMapper mapper = new ObjectMapper();
-            String availableCredit = mapper.writeValueAsString(machine.getAvailableCredit());
-            res.body("credit: " + availableCredit);
-            res.status(200);
-
-            return availableCredit;
+            String machineStatus = gson.toJson(machine.getStatus());
+            return machineStatus;
 
         } );
 
@@ -66,6 +58,13 @@ public class SparkController {
 
         post("/vend", (req, res) -> {
             machine.vend();
+            String machineStatus = gson.toJson(machine.getStatus());
+            res.status(200);
+            return machineStatus;
+        } );
+
+        post("/service", (req, res) -> {
+            machine.service();
             String machineStatus = gson.toJson(machine.getStatus());
             res.status(200);
             return machineStatus;

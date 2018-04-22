@@ -1,4 +1,5 @@
 // currently assuming the price will not change without a manual reprogram of the machine
+// Jackson library used for json serialization as Gson does not offer easy enum serialization
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

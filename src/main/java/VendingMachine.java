@@ -72,10 +72,13 @@ public class VendingMachine {
 
     public void coinReturn() {
 //        I'm not modelling the purchaser, so the coins effectively vanish here and the machine resets
+        Integer changeValue = this.coinSlot.getCashCount();
         this.coinSlot.transferAllCoins(new CoinContainer());
         this.selectedItem = null;
         this.message = "Please select an item.";
-        this.itemsToCollect = "";
+        if (changeValue > 0) {
+            this.itemsToCollect = "Please collect change of " + changeValue + ".";
+        }
     }
 
 
@@ -137,6 +140,7 @@ public class VendingMachine {
     public String getItemsToCollect() {
         return this.itemsToCollect;
     }
+
 
     public HashMap<String,String> getStatus() {
         HashMap<String, String> status = new HashMap<>();
