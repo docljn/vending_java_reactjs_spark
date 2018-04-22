@@ -10,7 +10,7 @@ class DisplayCabinet extends Component {
   render(){
     const html = this.props.items.map(item => {
       return (
-        <StockItem id={item.selector} price={item.price} key={this.props.items.indexOf(item)} onClick={this.props.itemClick}/>
+        <StockItem id={item.selector} key={this.props.items.indexOf(item)} onClick={this.props.itemClick}/>
       );
     });
 

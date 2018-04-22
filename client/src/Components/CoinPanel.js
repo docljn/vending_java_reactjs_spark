@@ -10,7 +10,7 @@ class CoinPanel extends Component {
   render(){
     const html = this.props.coins.map(coin => {
       return (
-        <Coin type={coin.type} value={coin.value}  key={this.props.coins.indexOf(coin)} coinClick={this.props.coinClick}/>
+        <Coin type={coin.type} key={this.props.coins.indexOf(coin)} coinClick={this.props.coinClick}/>
       );
     });
 
