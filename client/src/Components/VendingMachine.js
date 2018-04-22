@@ -16,14 +16,13 @@ class VendingMachine extends Component {
       items: this.props.items
     };
     this.postRequestOnClick = this.postRequestOnClick.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+
     this.handleCoinClick = this.handleCoinClick.bind(this);
     this.handleItemClick = this.handleItemClick.bind(this);
     this.handleServiceClick = this.handleServiceClick.bind(this);
     this.handleCoinReturnClick = this.handleCoinReturnClick.bind(this);
     this.handleVendClick = this.handleVendClick.bind(this);
-    // this.postOnCoinClick = this.postOnCoinClick.bind(this);
-    // this.postOnVendClick = this.postOnVendClick.bind(this);
-    // get all details of vending machine and set state here.....
   }
 
   render() {
@@ -53,7 +52,10 @@ class VendingMachine extends Component {
     );
   }
 
-
+  handleClick(event, url) {
+    event.preventDefault();
+    this.postRequestOnClick(url);
+  }
 
 
   handleVendClick(event) {
