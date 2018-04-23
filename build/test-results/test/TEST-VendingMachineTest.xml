@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="VendingMachineTest" tests="36" skipped="2" failures="0" errors="0" timestamp="2018-04-23T21:25:25" hostname="Apple-3.local" time="0.011">
+  <properties/>
+  <testcase name="serviceReturnsCoinsInOrderToEmptyCoinSlot" classname="VendingMachineTest" time="0.001"/>
+  <testcase name="serviceFillsChangeHopperWith100OfEachCoin" classname="VendingMachineTest" time="0.0"/>
+  <testcase name="vendResetsSelectedItemToNull" classname="VendingMachineTest" time="0.0"/>
+  <testcase name="vendAddsChangeAmountToItemsToCollect" classname="VendingMachineTest" time="0.001"/>
+  <testcase name="getItemsToCollectReturnsString" classname="VendingMachineTest" time="0.0"/>
+  <testcase name="selectWorksWithStringVariableSelector" classname="VendingMachineTest" time="0.0"/>
+  <testcase name="vendCausesInsertCoinsRequestIfInsufficientFunds" classname="VendingMachineTest" time="0.0"/>
+  <testcase name="vendLeavesCoinInSlotIfSelectedItemIsNull" classname="VendingMachineTest" time="0.0"/>
+  <testcase name="selectSetsStockItemToSelected" classname="VendingMachineTest" time="0.0"/>
+  <testcase name="machineAcceptsStatedCoins" classname="VendingMachineTest" time="0.001"/>
+  <testcase name="addingCoinsByTypeFillsCoinSlot" classname="VendingMachineTest" time="0.0"/>
+  <testcase name="selectSetsSelectedToNullIfNotInStock" classname="VendingMachineTest" time="0.0"/>
+  <testcase name="serviceFillsDisplayCabinetWithTenOfEachOfThreeItems" classname="VendingMachineTest" time="0.0"/>
+  <testcase name="vendAddsSelectedItemToItemsToCollect" classname="VendingMachineTest" time="0.0"/>
+  <testcase name="serviceResetsItemsToCollect" classname="VendingMachineTest" time="0.0"/>
+  <testcase name="coinReturnResetsMessageToDefault" classname="VendingMachineTest" time="0.001"/>
+  <testcase name="vendDecreasesSelectedItemCount" classname="VendingMachineTest" time="0.0"/>
+  <testcase name="coinReturnResetsSelectedToNull" classname="VendingMachineTest" time="0.0"/>
+  <testcase name="getMessageReturnsMessage" classname="VendingMachineTest" time="0.001"/>
+  <testcase name="selectDisplaysOutOfStockMessage" classname="VendingMachineTest" time="0.0"/>
+  <testcase name="coinReturnEmptiesCoinSlot" classname="VendingMachineTest" time="0.0"/>
+  <testcase name="machineStocksStatedItems" classname="VendingMachineTest" time="0.0"/>
+  <testcase name="selectingItemClearsItemsToCollect" classname="VendingMachineTest" time="0.001"/>
+  <testcase name="vendResetsMessageIfSuccessful" classname="VendingMachineTest" time="0.0"/>
+  <testcase name="vendDispensesCorrectChangeIfAvailable" classname="VendingMachineTest" time="0.0"/>
+  <testcase name="addingCoinsFillsCoinSlot" classname="VendingMachineTest" time="0.0"/>
+  <testcase name="machineWillDisplayChangeWarningIfAnyCoinCountBelowFiveAfterVend" classname="VendingMachineTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="machineGetStatusReturnsSummaryHashForAPI" classname="VendingMachineTest" time="0.0"/>
+  <testcase name="vendLeavesCoinsInSlotIfInsufficientFunds" classname="VendingMachineTest" time="0.0"/>
+  <testcase name="vendTransfersCoinsFromSlotToHopper" classname="VendingMachineTest" time="0.001"/>
+  <testcase name="machineDoesNotReturnDollars" classname="VendingMachineTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="vendLeavesItemSelectedIfInsufficientFunds" classname="VendingMachineTest" time="0.0"/>
+  <testcase name="vendDispensesAvailableChangeOnlyIfInsufficientChange" classname="VendingMachineTest" time="0.0"/>
+  <testcase name="selectWorksWithStringSelector" classname="VendingMachineTest" time="0.001"/>
+  <testcase name="machineGetStatusReturnsSummaryHashForAPIIfNullValuesPresent" classname="VendingMachineTest" time="0.0"/>
+  <testcase name="addingCoinsClearsItemsToCollect" classname="VendingMachineTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

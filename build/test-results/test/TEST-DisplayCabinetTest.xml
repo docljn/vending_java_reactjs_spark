@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="DisplayCabinetTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2018-04-23T21:25:25" hostname="Apple-3.local" time="0.003">
+  <properties/>
+  <testcase name="canReturnContents" classname="DisplayCabinetTest" time="0.001"/>
+  <testcase name="cannotRemoveOutOfStockItem" classname="DisplayCabinetTest" time="0.0"/>
+  <testcase name="startsEmpty" classname="DisplayCabinetTest" time="0.0"/>
+  <testcase name="canBeRestocked" classname="DisplayCabinetTest" time="0.0"/>
+  <testcase name="canRemoveItem" classname="DisplayCabinetTest" time="0.0"/>
+  <testcase name="canReturnItemsStocked" classname="DisplayCabinetTest" time="0.0"/>
+  <testcase name="canAcceptSingleStockItem" classname="DisplayCabinetTest" time="0.0"/>
+  <testcase name="canDetermineIfItemInStock" classname="DisplayCabinetTest" time="0.0"/>
+  <testcase name="canSelectItemBySelector" classname="DisplayCabinetTest" time="0.001"/>
+  <testcase name="canAcceptMultipleStockItems" classname="DisplayCabinetTest" time="0.0"/>
+  <testcase name="cannotRemoveItemNotForSale" classname="DisplayCabinetTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

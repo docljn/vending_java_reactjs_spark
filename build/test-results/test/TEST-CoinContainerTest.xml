@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="CoinContainerTest" tests="20" skipped="1" failures="0" errors="0" timestamp="2018-04-23T21:25:25" hostname="Apple-3.local" time="0.01">
+  <properties/>
+  <testcase name="canReturnCoinContents" classname="CoinContainerTest" time="0.001"/>
+  <testcase name="canAddCoins" classname="CoinContainerTest" time="0.0"/>
+  <testcase name="removingCoinSuccessfullyReturnsTrue" classname="CoinContainerTest" time="0.002"/>
+  <testcase name="canCalculateTotalCashCount" classname="CoinContainerTest" time="0.0"/>
+  <testcase name="canReturnCoinListEquivalentIfCoinsMissing" classname="CoinContainerTest" time="0.0"/>
+  <testcase name="startsEmpty" classname="CoinContainerTest" time="0.0"/>
+  <testcase name="resetFloatSetsFloatToSpecifiedLevels" classname="CoinContainerTest" time="0.0"/>
+  <testcase name="canRemoveCoin" classname="CoinContainerTest" time="0.0"/>
+  <testcase name="transferRemovesAllCoinsFromContainer" classname="CoinContainerTest" time="0.0"/>
+  <testcase name="canReturnCoinListEquivalentToStatedAmount" classname="CoinContainerTest" time="0.0"/>
+  <testcase name="shouldRaiseErrorIfAttemptToRemoveMoreCoinsThanPresent" classname="CoinContainerTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="transferAddsAllCoinsToAlternativeContainer" classname="CoinContainerTest" time="0.0"/>
+  <testcase name="canReturnCoinListEquivalentIfRunOutOfSomeCoins" classname="CoinContainerTest" time="0.0"/>
+  <testcase name="cannotRemoveMultipleCoinsIfNotPresent" classname="CoinContainerTest" time="0.0"/>
+  <testcase name="canAddAcceptedCoinMatchingType" classname="CoinContainerTest" time="0.0"/>
+  <testcase name="canReturnAcceptedCoinList" classname="CoinContainerTest" time="0.002"/>
+  <testcase name="cannotRemoveCoinNotPresent" classname="CoinContainerTest" time="0.001"/>
+  <testcase name="canAddMultipleCoins" classname="CoinContainerTest" time="0.0"/>
+  <testcase name="canRemoveMultipleCoins" classname="CoinContainerTest" time="0.001"/>
+  <testcase name="canRemoveHashMapOfCoins" classname="CoinContainerTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
